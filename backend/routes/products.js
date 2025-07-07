@@ -74,6 +74,7 @@ router.post('/', (req, res) => {
 });
 
 // G E T
+// Obtain all products
 router.get('/', (req, res) => {
   db.all("SELECT * FROM products", [], (err, rows) => {
     if (err) {
@@ -84,6 +85,7 @@ router.get('/', (req, res) => {
   });
 });
 
+//Obtain product by ID
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   
@@ -98,6 +100,33 @@ router.get('/:id', (req, res) => {
     res.json(row);
   }); 
 })
+
+// U P D A T E
+router.patch('/:id', (req, res) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  const fields = Object.keys(updates);
+  const values = Object.values(updates);
+
+  if (fields.length === 0) {
+    return res.status(400).json({ error: 'No fields to update' });
+  }
+
+  const setClause = fields.map(field => `${field} = ?`).join(', ');
+  const sql = `UPDATE products SET ${setClause} WHERE id = ?`;
+
+  db.run(sql, [...values, id], function (err) {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Database error' });
+    }
+    if (this.changes === 0) {
+      return res.status(404).json({ error: 'Producto no encontrado' });
+    }
+    res.json({ message: 'Producto actualizado', changes: this.changes });
+  });
+});
 
 // D E L E T E
 router.delete('/:id', (req, res) => {

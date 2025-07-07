@@ -1,0 +1,160 @@
+import { useState, useEffect } from 'react';
+import type { Product } from '../../interfaces/Product.interface';
+import { toInputDate } from '../../utils/dateHelpers';
+
+interface Props {
+  onUpdated: () => void;
+}
+
+function EditProduct({ onUpdated }: Props) {
+  const [productId, setProductId] = useState('');
+  const [productData, setProductData] = useState<Product | null>(null);
+  const [form, setForm] = useState<Partial<Product>>({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Sync product data to form state
+  useEffect(() => {
+    if (productData) setForm(productData);
+  }, [productData]);
+
+  const fetchProduct = async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch(`http://localhost:3001/api/products/${productId}`);
+      if (!res.ok) throw new Error('Producto no encontrado');
+      const data = await res.json();
+      setProductData(data);
+    } catch (err: any) {
+      setError(err.message || 'Error al cargar producto');
+      setProductData(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setForm(prev => ({
+      ...prev,
+      [name]: name === 'price' || name.includes('price') ? Number(value) : value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!productData) return;
+
+    try {
+      const res = await fetch(`http://localhost:3001/api/products/${productId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+
+      if (!res.ok) throw new Error('Error al actualizar producto');
+
+      alert('Producto actualizado correctamente');
+      onUpdated();
+    } catch (err) {
+      alert('Error al actualizar producto');
+    }
+  };
+
+  return (
+    <div className='container'>
+      <h2>Editar Producto</h2>
+
+      {/* Ingreso de ID */}
+      {!productData && (
+        <form
+          className='mb-4'
+          onSubmit={(e) => {
+            e.preventDefault();
+            fetchProduct();
+          }}
+        >
+          <label className='form-label'>ID del producto:</label>
+          <input
+            type='text'
+            className='form-control mb-2'
+            value={productId}
+            onChange={(e) => setProductId(e.target.value)}
+            required
+          />
+          <button className='btn btn-primary' type='submit' disabled={loading}>
+            {loading ? "Cargando..." : "Cargar producto"}
+          </button>
+          {error && <div className='text-danger mt-2'>{error}</div>}
+        </form>
+      )}
+
+      {/* Edition Form */}
+      {productData && (
+        <form onSubmit={handleSubmit}>
+          <div className='mb-3'>
+            <label className='form-label'>Nombre</label>
+            <input
+              name='name'
+              type='text'
+              className='form-control'
+              value={form.name || ''}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className='mb-3'>
+            <label className='form-label'>Precio</label>
+            <input
+              name='price'
+              type='number'
+              className='form-control'
+              value={form.price ?? ''}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className='mb-3'>
+            <label className='form-label'>Fecha de ingreso</label>
+            <input
+              type='date'
+              name='incoming_date'
+              className='form-control'
+              value={toInputDate(form.incoming_date || '')}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className='mb-3'>
+            <label className='form-label'>Notas</label>
+            <textarea
+              name='note'
+              className='form-control'
+              rows={3}
+              value={form.note || ''}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className='d-flex gap-2'>
+            <button className='btn btn-success' type='submit'>
+              Guardar Cambios
+            </button>
+            <button
+              className='btn btn-secondary'
+              type='button'
+              onClick={onUpdated}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      )}
+    </div>
+  );
+}
+
+export default EditProduct;

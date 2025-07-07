@@ -40,6 +40,30 @@ function Sidebar({ onChangeView }: Props) {
         </div>
 
         <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>                  
+            <button
+              className='btn btn-link text-white'
+              style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('editProduct')}
+            >
+              Editar Producto
+            </button>
+          </div>
+        </div>
+
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>                  
+            <button
+              className='btn btn-link text-white'
+              style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('listProducts')}
+            >
+              Ver listado Productos
+            </button>
+          </div>
+        </div>
+
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
           <div className='accordion-body' style={{ padding:'.5rem'}}>  
             <button
               className='btn btn-link text-white'
