@@ -1,0 +1,36 @@
+# Node modules
+node_modules/
+**/node_modules/
+
+# Build
+dist/
+build/
+out/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# .env files (credentials, private routes)
+.env
+.env.*
+
+# Operative Sistem / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Electron
+*.asar
+
+# SQLite
+*.sqlite
+*.db
+
+# Others
+*.log
+*.lock
+package-lock.json
+yarn.lock
