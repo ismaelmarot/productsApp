@@ -6,98 +6,100 @@ interface Props {
 
 function Sidebar({ onChangeView }: Props) {
   return (
-    <div className="bg-dark text-white p-3" style={{ width: '18rem' }}>
-      <ul className="nav flex-column">
-        <li className="nav-item">
-          <button
-            className="btn btn-link text-white"
-            onClick={() => onChangeView('addProduct')}
-          >
-            Agregar Producto
+    <div className='accordion' id='accordionExample'>
+      {/*  Products Section */}
+      <div className='accordion-item'>
+        <h2 className='accordion-header' id='headingOne'>
+          <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+            <strong>Productos</strong>
           </button>
-        </li>
-
-        <li className="nav-item">
-          <button
-            className="btn btn-link text-white"
-            onClick={() => onChangeView('deleteProduct')}
-          >
-            Eliminar Producto
-          </button>
-        </li>
-
-        <li className="nav-item">
-          <button
-            className="btn btn-link text-white"
-            onClick={() => onChangeView('detailsProduct')}
-          >
-            Ver Detalles Producto
-          </button>
-        </li>
-
-
-
-
-
-        <li className="nav-item">
-          <button
-            className="btn btn-link text-white"
-            onClick={() => onChangeView("personas")}
-          >
-            PERSONAS
-          </button>
-        </li>
-        <li className="nav-item">
-          <button
-            className="btn btn-link text-white"
-            onClick={() => onChangeView("lugares")}
-          >
-            LUGARES
-          </button>
-        </li>
-      </ul>
-
-
-    {/* <div className='accordion' id='accordionPanelsStayOpenExample'>
-
-        <div className='accordion-item'>
-        <h2 className='accordion-header' id='panelsStayOpen-headingThree'>
-            <button className='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseThree' aria-expanded='false' aria-controls='panelsStayOpen-collapseThree'>
-                PRODUCTOS
-            </button>
         </h2>
-        <div id='panelsStayOpen-collapseThree' className='accordion-collapse collapse' aria-labelledby='panelsStayOpen-headingThree'>
-            <div className='accordion-body'>
-                <div className='nav-item'>
-                    <button 
-                        className='btn btn-link'
-                        onClick={() => onChangeView('productos')}
-                    >
-                        + Agregar
-                    </button>
-                </div>
-            </div>
+
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>                  
+            <button
+              className='btn btn-link text-white'
+              style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('detailsProduct')}
+            >
+              Ver Producto
+            </button>
+          </div>
         </div>
-    </div>
-
-
-
-
-        <div className='accordion-item'>
-            <h2 className='accordion-header' id='panelsStayOpen-headingThree'>
-                <button className='accordion-button collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#panelsStayOpen-collapseThree' aria-expanded='false' aria-controls='panelsStayOpen-collapseThree'>
-                    LUGARES
-                </button>
-            </h2>
-            <div id='panelsStayOpen-collapseThree' className='accordion-collapse collapse' aria-labelledby='panelsStayOpen-headingThree'>
-                <div className='accordion-body'>
-                    text
-                </div>
-            </div>
+        
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>
+            <button
+              className='btn btn-link text-white'
+              style={{ textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('addProduct')}
+            >
+              Agregar Producto
+            </button>
+          </div>
         </div>
-    </div> */}
+
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>  
+            <button
+              className='btn btn-link text-white'
+              style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('deleteProduct')}
+            >
+              Eliminar Producto
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/*  People Section */}
+      {/* <div className='accordion-item'>
+        <h2 className='accordion-header' id='headingOne'>
+          <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
+            <strong>Persona</strong>
+          </button>
+        </h2>
+
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>                  
+            <button
+              className='btn btn-link text-white'
+              style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('detailsProduct')}
+            >
+              Ver Persona
+            </button>
+          </div>
+        </div>
+        
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>
+            <button
+              className='btn btn-link text-white'
+              style={{ textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('addProduct')}
+            >
+              Agregar Persona
+            </button>
+          </div>
+        </div>
+
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>  
+            <button
+              className='btn btn-link text-white'
+              style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('deleteProduct')}
+            >
+              Eliminar Persona
+            </button>
+          </div>
+        </div>
+      </div> */}
+
     </div>
   );
 }
 
 export default Sidebar;
+

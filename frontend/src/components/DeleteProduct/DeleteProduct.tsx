@@ -56,7 +56,7 @@ function DeleteProduct({ onProductDeleted }: Props) {
 
     return (
         <form onSubmit={handleSubmit} className='mb-4'>
-        <h2>Eliminar producto por ID</h2>
+        <h2>Eliminar producto existente por ID</h2>
         {renderSetData('ID', 'number', id, (e) => setId(e.target.value))}
         <button type='submit' className='btn btn-danger'>
             Eliminar

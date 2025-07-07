@@ -31,13 +31,13 @@ function App() {
   return (
     <>
       <h1>GESTOR DE PRODUCTOS</h1>
-      <div className="d-flex" style={{ height: "100vh" }}>
+      <div className='d-flex' style={{ height: '100vh' }}>
       
       {/*Menú lateral */}
       <Sidebar onChangeView={setView} />
       
       {/* Contenido principal */}
-      <div className="flex-grow-1 p-4">
+      <div className='flex-grow-1 p-4'>
         {renderContent()}
       </div>
       

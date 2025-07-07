@@ -2,28 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db/database');
 
-// Insertar productos si la tabla está vacía
-db.get("SELECT COUNT(*) AS count FROM products", (err, row) => {
-  if (err) {
-    console.error("Error al contar productos:", err.message);
-    return;
-  }
-
-  if (row.count === 0) {
-    const productos = [
-      ["Aro de alpaca", 1200],
-      ["Collar de macramé", 800],
-      ["Pulsera tejida", 500],
-    ];
-
-    productos.forEach(([name, price]) => {
-      db.run("INSERT INTO products (name, price) VALUES (?, ?)", [name, price]);
-    });
-
-    console.log("Productos de prueba insertados.");
-  }
-});
-
 // P O S T
 router.post('/', (req, res) => {
   const {

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { Product } from '../../interfaces/Product.interface';
-
+import { Modal } from 'bootstrap'; 
+import SuccessModal from '../SuccessModal/SuccessModal';
 interface Props {
     onProductAdded: (newProduct: Product) => void;
 }
@@ -9,7 +10,8 @@ const renderSetData = (
     label: string,
     type: string,
     value: string | number,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    required: boolean = false
 ) => (
     <div className='mb-3'>
         <label className='form-label'>{ label }:</label>
@@ -18,7 +20,7 @@ const renderSetData = (
             className='form-control'
             value={ value }
             onChange={ onChange }
-            required
+            required={ required }
         />
     </div>
 );
@@ -37,6 +39,16 @@ function AddProduct({ onProductAdded }: Props) {
     const [payment_date, setPaymentDate] = useState('');
     const [payment_method, setPaymentMethod] = useState('');
     const [note, setNote] = useState('');
+
+    const [showModal, setShowModal] = useState(false);
+    const modalRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (modalRef.current) {
+            const modal = Modal.getOrCreateInstance(modalRef.current);
+            showModal ? modal.show() : modal.hide();
+        }
+        }, [showModal]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -92,6 +104,7 @@ function AddProduct({ onProductAdded }: Props) {
                 setPaymentDate('');
                 setPaymentMethod('');
                 setNote('');
+                setShowModal(true);
             } else {
                 alert("Error al agregar el producto: " + (data.error || ''));
             }
@@ -102,26 +115,30 @@ function AddProduct({ onProductAdded }: Props) {
     };
 
     return (
+        <>
         <form onSubmit={ handleSubmit } className='mb-4'>
-            <h2>Agregar nuevo producto</h2>
-            {renderSetData('Nombre', 'text', name, (e) => setName(e.target.value))}
-            {renderSetData('Precio', 'number', price, (e) => setPrice(e.target.value))}
-            {renderSetData('Código', 'text', code, (e) => setCode(e.target.value))}
-            {renderSetData('Categoría', 'text', category, (e) => setCategory(e.target.value))}
-            {renderSetData('Precio de Costo', 'number', cost_price, (e) => setCostPrice(e.target.value))}
-            {renderSetData('Precio de Venta', 'number', sales_price, (e) => setSalesPrice(e.target.value))}
-            {renderSetData('Precio Vendido', 'number', sold_price, (e) => setSoldPrice(e.target.value))}
-            {renderSetData('Fecha de Ingreso', 'date', incoming_date, (e) => setIncomingDate(e.target.value))}
-            {renderSetData('Fecha de Salida', 'date', outgoing_date, (e) => setOutgoingDate(e.target.value))}
-            {renderSetData('Motivo de Salida', 'text', reason_outgoing, (e) => setReasonOutgoing(e.target.value))}
-            {renderSetData('Fecha de Pago', 'date', payment_date, (e) => setPaymentDate(e.target.value))}
-            {renderSetData('Método de Pago', 'text', payment_method, (e) => setPaymentMethod(e.target.value))}
+            <h2>Agregar un nuevo producto</h2>
+            {renderSetData('Nombre', 'text', name, (e) => setName(e.target.value), true)}
+            {renderSetData('Categoría', 'text', category, (e) => setCategory(e.target.value), true)}
+            {renderSetData('Código', 'text', code, (e) => setCode(e.target.value), true)}
+            {renderSetData('Fecha de Ingreso', 'date', incoming_date, (e) => setIncomingDate(e.target.value), true)}
+            {renderSetData('Precio de Costo', 'number', cost_price, (e) => setCostPrice(e.target.value), true)}
+            {renderSetData('Precio de Venta', 'number', sales_price, (e) => setSalesPrice(e.target.value), true)}
+            {renderSetData('Precio', 'number', price, (e) => setPrice(e.target.value), true)}
             {renderSetData('Nota', 'text', note, (e) => setNote(e.target.value))}
+            {/* {renderSetData('Precio Vendido', 'number', sold_price, (e) => setSoldPrice(e.target.value))} */}
+            {/* {renderSetData('Fecha de Salida', 'date', outgoing_date, (e) => setOutgoingDate(e.target.value), true)} */}
+            {/* {renderSetData('Motivo de Salida', 'text', reason_outgoing, (e) => setReasonOutgoing(e.target.value), true)} */}
+            {/* {renderSetData('Fecha de Pago', 'date', payment_date, (e) => setPaymentDate(e.target.value))} */}
+            {/* {renderSetData('Método de Pago', 'text', payment_method, (e) => setPaymentMethod(e.target.value), true)} */}
             <button type='submit' className='btn btn-primary'>
                 Agregar
             </button>
         </form>
-    );
+
+      <SuccessModal show={showModal} onClose={() => setShowModal(false)} />
+      </>
+    )
 }
 
 export default AddProduct;
