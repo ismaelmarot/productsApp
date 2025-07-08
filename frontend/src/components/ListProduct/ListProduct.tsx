@@ -15,11 +15,11 @@ function ProductList({ onViewProduct, onEditProduct }: Props) {
     const fetchProducts = async () => {
       try {
         const res = await fetch('http://localhost:3001/api/products');
-        if (!res.ok) throw new Error('Error al cargar productos');
+        if (!res.ok) throw new Error("Error al cargar productos");
         const data = await res.json();
         setProducts(data);
       } catch (err: any) {
-        setError(err.message || 'Error desconocido');
+        setError(err.message || "Error desconocido");
       } finally {
         setLoading(false);
       }
@@ -54,13 +54,13 @@ function ProductList({ onViewProduct, onEditProduct }: Props) {
               <td>{p.category || '-'}</td>
               <td>
                 <button
-                  className="btn btn-sm btn-primary me-2"
+                  className='btn btn-sm btn-primary me-2'
                   onClick={() => onViewProduct(p)}
                 >
                   Ver
                 </button>
                 <button
-                  className="btn btn-sm btn-warning"
+                  className='btn btn-sm btn-warning'
                   onClick={() => onEditProduct(p)}
                 >
                   Editar
