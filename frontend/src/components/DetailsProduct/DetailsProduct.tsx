@@ -4,13 +4,13 @@ import FormatPrice from '../FormattedPriceInput/FormatPrice';
 import FormatDate from '../FormatDate/FormatDate';
 
 function DetailsProduct() {
-    const [productId, setProductId] = useState('');
+    const [productCode, setProductCode] = useState('');
     const [product, setProduct] = useState<Product | null>(null);
     const [error, setError] = useState('');
 
     const handleClose = () => {
         setProduct(null);
-        setProductId('');
+        setProductCode('');
         setError('');
     };
 
@@ -18,13 +18,13 @@ function DetailsProduct() {
         setError('');
         setProduct(null);
 
-        if (!productId) {
-            setError('Por favor ingrese un ID válido');
+        if (!productCode.trim()) {
+            setError('Por favor ingrese un Código válido');
             return;
         }
 
         try {
-            const res = await fetch(`http://localhost:3001/api/products/${productId}`);
+            const res = await fetch(`http://localhost:3001/api/products/code/${productCode}`);
             if (!res.ok) {
                 if (res.status === 404) {
                     setError("Producto no encontrado");
@@ -46,13 +46,13 @@ function DetailsProduct() {
             <h2>Buscar detalles de un producto</h2>
 
             <div className='mb-3'>
-                <label htmlFor='productId' className='form-label'>ID del producto</label>
+                <label htmlFor='productCode' className='form-label'>Código del producto</label>
                 <input
-                    id='productId'
-                    type='number'
+                    id='productCode'
+                    type='text'
                     className='form-control'
-                    value={productId}
-                    onChange={e => setProductId(e.target.value)}
+                    value={productCode}
+                    onChange={e => setProductCode(e.target.value)}
                 />
             </div>
 

@@ -74,6 +74,24 @@ router.post('/', (req, res) => {
 });
 
 // G E T
+// Obtain product by Code
+router.get('/code/:code', (req, res) => {
+  const code = req.params.code;
+
+  db.get("SELECT * FROM products WHERE code = ?", [code], (err, row) => {
+    if (err) {
+      console.error("Error al obtener producto por código:", err.message);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+
+    if (!row) {
+      return res.status(404).json({ error: "Producto no encontrado" });
+    }
+
+    res.json(row);
+  });
+});
+
 // Obtain all products
 router.get('/', (req, res) => {
   db.all("SELECT * FROM products", [], (err, rows) => {
