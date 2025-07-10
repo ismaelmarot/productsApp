@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 interface Props {
-    onProductDeleted: (deletedId: number) => void;
+    onProductDeleted: (deletedCode: string) => void;
 }
 
 const renderSetData = (
@@ -23,41 +23,49 @@ const renderSetData = (
     );
 
 function DeleteProduct({ onProductDeleted }: Props) {
-    const [id, setId] = useState('');
+    const [code, setCode] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const numericId = parseInt(id);
 
-        if (isNaN(numericId)) {
-            alert("ID inválido");
+        if (!code.trim()) {
+            alert("Código inválido");
             return;
         }
 
-        if (!window.confirm(`¿Eliminar producto #${numericId}?`)) return;
+        if (!window.confirm(`¿Eliminar producto con Código "${code}"?`)) return;
 
         try {
-        const res = await fetch(
-            `http://localhost:3001/api/products/${numericId}`,
-            { method: "DELETE" }
-        );
+            const resGet = await fetch(`http://localhost:3001/api/products/code/${code}`);
+            if (!resGet.ok) {
+            const errData = await resGet.json();
+                alert("Error al buscar el producto: " + errData.error);
+            return;
+        }
 
-        if (res.ok) {
-            onProductDeleted(numericId);
-            setId('');
+        const product = await resGet.json();
+
+        const resDelete = await fetch(`http://localhost:3001/api/products/${product.id}`, {
+            method: 'DELETE'
+        });
+
+        if (resDelete.ok) {
+            onProductDeleted(code);
+            setCode('');
         } else {
-            const data = await res.json();
+            const data = await resDelete.json();
             alert("Error eliminando: " + data.error);
         }
         } catch (err) {
             console.error("Error eliminando producto:", err);
+            alert("Error de conexión al eliminar el producto");
         }
     };
 
     return (
         <form onSubmit={handleSubmit} className='mb-4'>
         <h2>Eliminar producto existente por ID</h2>
-        {renderSetData('ID', 'number', id, (e) => setId(e.target.value))}
+        {renderSetData('ID', 'text', code, (e) => setCode(e.target.value))}
         <button type='submit' className='btn btn-danger'>
             Eliminar
         </button>
