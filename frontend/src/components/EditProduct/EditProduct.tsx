@@ -7,7 +7,7 @@ interface Props {
 }
 
 function EditProduct({ onUpdated }: Props) {
-  const [productId, setProductId] = useState('');
+  const [productCode, setProductCode] = useState('');
   const [productData, setProductData] = useState<Product | null>(null);
   const [form, setForm] = useState<Partial<Product>>({});
   const [loading, setLoading] = useState(false);
@@ -23,7 +23,7 @@ function EditProduct({ onUpdated }: Props) {
     setError(null);
 
     try {
-      const res = await fetch(`http://localhost:3001/api/products/${productId}`);
+      const res = await fetch(`http://localhost:3001/api/products/code/${productCode}`);
       if (!res.ok) throw new Error('Producto no encontrado');
       const data = await res.json();
       setProductData(data);
@@ -48,7 +48,7 @@ function EditProduct({ onUpdated }: Props) {
     if (!productData) return;
 
     try {
-      const res = await fetch(`http://localhost:3001/api/products/${productId}`, {
+      const res = await fetch(`http://localhost:3001/api/products/${productData.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -67,7 +67,7 @@ function EditProduct({ onUpdated }: Props) {
     <div className='container'>
       <h2>Editar Producto</h2>
 
-      {/* Ingreso de ID */}
+      {/* Ingreso de Código */}
       {!productData && (
         <form
           className='mb-4'
@@ -76,12 +76,12 @@ function EditProduct({ onUpdated }: Props) {
             fetchProduct();
           }}
         >
-          <label className='form-label'>ID del producto:</label>
+          <label className='form-label'>Código del producto:</label>
           <input
             type='text'
             className='form-control mb-2'
-            value={productId}
-            onChange={(e) => setProductId(e.target.value)}
+            value={productCode}
+            onChange={(e) => setProductCode(e.target.value)}
             required
           />
           <button className='btn btn-primary' type='submit' disabled={loading}>
