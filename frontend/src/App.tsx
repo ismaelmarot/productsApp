@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import AddProduct from './components/AddProduct/AddProduct';
-import DeleteProduct from './components/DeleteProduct/DeleteProduct';
-import DetailsProduct from './components/DetailsProduct/DetailsProduct';
-import EditProduct from './components/EditProduct/EditProduct';
+import AddProduct from './components/Product/AddProduct/AddProduct';
+import DeleteProduct from './components/Product/DeleteProduct/DeleteProduct';
+import DetailsProduct from './components/Product/DetailsProduct/DetailsProduct';
+import EditProduct from './components/Product/EditProduct/EditProduct';
 import Sidebar from './components/Sidebar/Sidebar';
 import type { Product } from './interfaces/Product.interface';
-import ProductList from './components/ListProduct/ListProduct';
+import ProductList from './components/Product/ListProduct/ListProduct';
 
 export type View =
   | 'products'

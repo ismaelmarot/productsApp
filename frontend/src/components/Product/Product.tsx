@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { Product } from '../../interfaces/Product.interface';
-import AddProduct from '../AddProduct/AddProduct';
+import AddProduct from './AddProduct/AddProduct';
 
 
 function Products() {

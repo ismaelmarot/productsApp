@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import type { Product } from '../../interfaces/Product.interface';
-import FormatPrice from '../FormattedPriceInput/FormatPrice';
-import FormatDate from '../FormatDate/FormatDate';
+import type { Product } from '../../../interfaces/Product.interface';
+import FormatPrice from '../../FormattedPriceInput/FormatPrice';
+import FormatDate from '../../FormatDate/FormatDate';
 
 function DetailsProduct() {
     const [productCode, setProductCode] = useState('');

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import type { Product } from '../../interfaces/Product.interface';
+import type { Product } from '../../../interfaces/Product.interface';
 import { Modal } from 'bootstrap'; 
-import SuccessModal from '../SuccessModal/SuccessModal';
+import SuccessModal from '../../SuccessModal/SuccessModal';
 interface Props {
     onProductAdded: (newProduct: Product) => void;
 }

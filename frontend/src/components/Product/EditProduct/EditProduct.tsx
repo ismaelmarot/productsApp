@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { Product } from '../../interfaces/Product.interface';
-import { toInputDate } from '../../utils/dateHelpers';
+import type { Product } from '../../../interfaces/Product.interface';
+import { toInputDate } from '../../../utils/dateHelpers';
 
 interface Props {
   onUpdated: () => void;
