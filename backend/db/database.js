@@ -28,6 +28,39 @@ db.serialize(() => {
             console.log("Products table created or already exists.");
         }
     });
+
+    db.run(`ALTER TABLE products ADD COLUMN producer_id INTEGER`, (err) => {
+        if (err && !err.message.includes('duplicate column')) {
+        console.error("Error adding producer_id to products table:", err.message);
+        } else {
+        console.log("Campo producer_id agregado o ya existe en products.");
+        }
+    });
+
+    db.run(`CREATE TABLE IF NOT EXISTS producers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        first_name TEXT NOT NULL,
+        middle_name TEXT,
+        last_name TEXT NOT NULL,
+        nickname TEXT,
+        cell_phone TEXT,
+        home_phone TEXT,
+        email TEXT,
+        address TEXT,
+        city TEXT,
+        state TEXT,
+        country TEXT,
+        zip_code TEXT,
+        website TEXT,
+        social_media TEXT,
+        note TEXT
+    )`, (err) => {
+        if (err) {
+            console.error("Error creating producers table:", err.message);
+        } else {
+            console.log("Producers table created or already exists.");
+        }
+    });
 });
 
 module.exports = db;
