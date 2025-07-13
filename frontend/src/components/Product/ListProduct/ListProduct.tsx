@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import type { Product } from '../../interfaces/Product.interface';
+import type { Product } from '../../../interfaces/Product.interface';
 
 interface Props {
   onViewProduct: (product: Product) => void;
