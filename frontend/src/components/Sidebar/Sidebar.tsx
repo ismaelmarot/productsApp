@@ -77,10 +77,10 @@ function Sidebar({ onChangeView }: Props) {
       </div>
 
       {/*  People Section */}
-      {/* <div className='accordion-item'>
+      <div className='accordion-item'>
         <h2 className='accordion-header' id='headingOne'>
           <button className='accordion-button' type='button' data-bs-toggle='collapse' data-bs-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne'>
-            <strong>Persona</strong>
+            <strong>Productores</strong>
           </button>
         </h2>
 
@@ -91,7 +91,7 @@ function Sidebar({ onChangeView }: Props) {
               style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
               onClick={() => onChangeView('detailsProduct')}
             >
-              Ver Persona
+              Ver Productor
             </button>
           </div>
         </div>
@@ -101,9 +101,9 @@ function Sidebar({ onChangeView }: Props) {
             <button
               className='btn btn-link text-white'
               style={{ textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
-              onClick={() => onChangeView('addProduct')}
+              onClick={() => onChangeView('addProducer')}
             >
-              Agregar Persona
+              Agregar Productor
             </button>
           </div>
         </div>
@@ -115,11 +115,11 @@ function Sidebar({ onChangeView }: Props) {
               style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
               onClick={() => onChangeView('deleteProduct')}
             >
-              Eliminar Persona
+              Eliminar Productor
             </button>
           </div>
         </div>
-      </div> */}
+      </div>
 
     </div>
   );

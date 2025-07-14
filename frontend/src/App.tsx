@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import Sidebar from './components/Sidebar/Sidebar';
+import type { Product } from './interfaces/Product.interface';
 import AddProduct from './components/Product/AddProduct/AddProduct';
 import DeleteProduct from './components/Product/DeleteProduct/DeleteProduct';
 import DetailsProduct from './components/Product/DetailsProduct/DetailsProduct';
 import EditProduct from './components/Product/EditProduct/EditProduct';
-import Sidebar from './components/Sidebar/Sidebar';
-import type { Product } from './interfaces/Product.interface';
 import ProductList from './components/Product/ListProduct/ListProduct';
+
+import AddProducer from './components/Producer/AddProducer/AddProducer';
 
 export type View =
   | 'products'
@@ -14,8 +16,9 @@ export type View =
   | 'detailsProduct'
   | 'listProducts'
   | 'editProduct'
-  | 'personas'
+  | 'addProducer'
   | 'lugares';
+
 
 function App() {
   const [view, setView] = useState<View>('products');
@@ -24,7 +27,6 @@ function App() {
   const handleDone = () => {
     setView('products');
   };
-
 
   const renderContent = () => {
     switch (view) {
@@ -48,7 +50,12 @@ function App() {
           />
       );
       case 'deleteProduct':
-          return <DeleteProduct onProductDeleted={() => {}} />;
+        return <DeleteProduct onProductDeleted={() => {}} />;
+
+      case 'addProducer':
+        return <AddProducer onProducerAdded={handleDone} />;
+
+
       default:
         return null;
     }
