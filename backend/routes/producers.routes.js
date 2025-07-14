@@ -22,19 +22,23 @@ router.post('/', (req, res) => {
     note
   } = req.body;
 
+  if (!first_name || !last_name) {
+    return res.status(400).json({ error: "Nombre y apellido son obligatorios" });
+  }
+
   const query = `
     INSERT INTO producers (
-      first_name, middle_name, last_name, nickname,
-      cell_phone, home_phone, email, address,
-      city, state, country, zip_code,
+      first_name, middle_name, last_name,
+      nickname, cell_phone, home_phone, email,
+      address, city, state, country, zip_code,
       website, social_media, note
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const params = [
-    first_name, middle_name, last_name, nickname,
-    cell_phone, home_phone, email, address,
-    city, state, country, zip_code,
+    first_name, middle_name, last_name,
+    nickname, cell_phone, home_phone, email,
+    address, city, state, country, zip_code,
     website, social_media, note
   ];
 

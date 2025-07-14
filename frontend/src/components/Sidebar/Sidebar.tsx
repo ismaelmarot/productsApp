@@ -89,7 +89,7 @@ function Sidebar({ onChangeView }: Props) {
             <button
               className='btn btn-link text-white'
               style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
-              onClick={() => onChangeView('detailsProduct')}
+              onClick={() => onChangeView('detailsProducer')}
             >
               Ver Productor
             </button>

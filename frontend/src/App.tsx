@@ -8,6 +8,8 @@ import EditProduct from './components/Product/EditProduct/EditProduct';
 import ProductList from './components/Product/ListProduct/ListProduct';
 
 import AddProducer from './components/Producer/AddProducer/AddProducer';
+import DetailsProducer from './components/Producer/DetailsProducer/DetailsProducer';
+
 
 export type View =
   | 'products'
@@ -17,6 +19,7 @@ export type View =
   | 'listProducts'
   | 'editProduct'
   | 'addProducer'
+  | 'detailsProducer'
   | 'lugares';
 
 
@@ -54,6 +57,8 @@ function App() {
 
       case 'addProducer':
         return <AddProducer onProducerAdded={handleDone} />;
+      case 'detailsProducer':
+        return <DetailsProducer />;
 
 
       default:

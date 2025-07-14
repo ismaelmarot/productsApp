@@ -1,4 +1,6 @@
 export interface Producer {
+  id?: string;
+  code?: string;
   first_name: string;
   middle_name?: string;
   last_name: string;
