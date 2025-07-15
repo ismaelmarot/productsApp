@@ -1,112 +1,27 @@
 import { useState } from 'react';
-import Sidebar from './components/Sidebar/Sidebar';
+import type { View } from './components/types/View';
 import type { Product } from './interfaces/Product.interface';
 import type { Producer } from './interfaces/Producer.interface';
-import AddProduct from './components/Product/AddProduct/AddProduct';
-import DetailsProduct from './components/Product/DetailsProduct/DetailsProduct';
-import EditProduct from './components/Product/EditProduct/EditProduct';
-import ListProducts from './components/Product/ListProducts/ListProducts';
-import DeleteProduct from './components/Product/DeleteProduct/DeleteProduct';
-
-import AddProducer from './components/Producer/AddProducer/AddProducer';
-import DetailsProducer from './components/Producer/DetailsProducer/DetailsProducer';
-import EditProducer from './components/Producer/EditProducer/EditProducer';
-import ListProducers from './components/Producer/ListProducers/ListProducers';
-import DeleteProducer from './components/Producer/DeleteProducer/DeleteProducer';
-
-export type View =
-  | 'products'
-  | 'addProduct'
-  | 'detailsProduct'
-  | 'editProduct'
-  | 'listProducts'
-  | 'deleteProduct'
-  | 'addProducer'
-  | 'detailsProducer'
-  | 'editProducer'
-  | 'listProducers'
-  | 'deleteProducer'
+import Sidebar from './components/Sidebar/Sidebar';
+import MainView from './views/MainView/MainView';
 
 function App() {
   const [view, setView] = useState<View>('products');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [selectedProducer, setSelectedProducer] = useState<Producer | null>(null);
-  
-  const handleDone = () => {
-    setView('products');
-  };
-
-  const renderContent = () => {
-    switch (view) {
-      case 'addProduct':
-        return <AddProduct onProductAdded={(p) => setSelectedProduct(p)} />;
-      case 'detailsProduct':
-        return <DetailsProduct />;
-      case 'editProduct':
-        return <EditProduct onUpdated={handleDone} />;
-      case 'listProducts':
-        return (
-          <ListProducts
-            onViewProduct={(product) => {
-              setSelectedProduct(product);
-              setView('detailsProduct');
-            }}
-            onEditProduct={(product) => {
-              setSelectedProduct(product);
-              setView('editProduct');
-            }}
-          />
-      );
-      case 'deleteProduct':
-        return <DeleteProduct onProductDeleted={() => {}} />;
-
-      case 'addProducer':
-        return <AddProducer onProducerAdded={handleDone} />;
-      case 'editProducer':
-        return <EditProducer onUpdated={handleDone} />;
-        case 'detailsProducer':
-        return <DetailsProducer />;
-      case 'listProducers':
-        return (
-          <ListProducers
-            onViewProducer={(producer) => {
-              setSelectedProducer(producer);
-              setView('detailsProducer');
-            }}
-            onEditProducer={(producer) => {
-              setSelectedProducer(producer);
-              setView('editProducer');
-            }}
-          />
-        );
-      
-      case 'deleteProducer':
-        return (
-          <DeleteProducer
-            onProducerDeleted={(name) => {
-              alert(`Productor eliminado: ${name}`);
-            }}
-          />
-        );
-
-      case 'deleteProducer':
-        return <DeleteProducer onProducerDeleted={() => {}} />;
-
-      default:
-        return null;
-    }
-  };
 
   return (
     <>
-      <h1 style={{fontSize:'1.5rem'}}>GESTOR DE PRODUCTOS</h1>
-      <div className='d-flex' style={{ height: '100vh' }}>     
-        {/*Menú lateral */}
+      <h1 style={{ fontSize: '1.5rem' }}>GESTOR DE PRODUCTOS</h1>
+      <div className='d-flex' style={{ height: '100vh' }}>
         <Sidebar onChangeView={setView} />
-      
-        {/* Contenido principal */}
         <div className='flex-grow-1 p-4'>
-          {renderContent()}
+          <MainView
+            view={view}
+            setView={setView}
+            setSelectedProduct={setSelectedProduct}
+            setSelectedProducer={setSelectedProducer}
+          />
         </div>
       </div>
     </>
