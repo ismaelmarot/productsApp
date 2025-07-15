@@ -9,16 +9,20 @@ interface Props {
 function AddProducer({ onProducerAdded }: Props) {
   const [formData, setFormData] = useState<Producer>({
     first_name: '',
+    middle_name: '',
     last_name: '',
     country: 'Argentina',
+    full_name: '',
   });
 
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -27,24 +31,45 @@ function AddProducer({ onProducerAdded }: Props) {
     setSuccess(false);
 
     if (!formData.first_name || !formData.last_name) {
-      setError("Nombre y apellido son obligatorios");
+      setError('Nombre y apellido son obligatorios');
       return;
     }
+
+    // Generar full_name antes de enviar
+    const fullName = `${formData.first_name} ${formData.middle_name || ''} ${formData.last_name}`.trim();
+    const dataToSend = { ...formData, full_name: fullName };
 
     try {
       const res = await fetch('http://localhost:3001/api/producers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(dataToSend),
       });
 
-      if (!res.ok) throw new Error("Error al crear productor");
+      if (!res.ok) throw new Error('Error al crear productor');
 
       setSuccess(true);
-      setFormData({ first_name: '', last_name: '', country: 'Argentina' });
+      setFormData({
+        first_name: '',
+        middle_name: '',
+        last_name: '',
+        full_name: '',
+        nickname: '',
+        cell_phone: '',
+        home_phone: '',
+        email: '',
+        address: '',
+        city: '',
+        state: '',
+        country: 'Argentina',
+        zip_code: '',
+        website: '',
+        social_media: '',
+        note: '',
+      });
       onProducerAdded();
     } catch (err: any) {
-      setError(err.message || "Error desconocido");
+      setError(err.message || 'Error desconocido');
     }
   };
 
@@ -57,31 +82,75 @@ function AddProducer({ onProducerAdded }: Props) {
       <form onSubmit={handleSubmit}>
         <div className='mb-2'>
           <label>Nombre *</label>
-          <input type='text' className='form-control' name='first_name' value={formData.first_name} onChange={handleChange} required />
+          <input
+            type='text'
+            className='form-control'
+            name='first_name'
+            value={formData.first_name}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className='mb-2'>
           <label>Segundo nombre</label>
-          <input type='text' className='form-control' name='middle_name' value={formData.middle_name || ''} onChange={handleChange} />
+          <input
+            type='text'
+            className='form-control'
+            name='middle_name'
+            value={formData.middle_name || ''}
+            onChange={handleChange}
+          />
         </div>
         <div className='mb-2'>
           <label>Apellido *</label>
-          <input type='text' className='form-control' name='last_name' value={formData.last_name} onChange={handleChange} required />
+          <input
+            type='text'
+            className='form-control'
+            name='last_name'
+            value={formData.last_name}
+            onChange={handleChange}
+            required
+          />
         </div>
         <div className='mb-2'>
           <label>Apodo</label>
-          <input type='text' className='form-control' name='nickname' value={formData.nickname || ''} onChange={handleChange} />
+          <input
+            type='text'
+            className='form-control'
+            name='nickname'
+            value={formData.nickname || ''}
+            onChange={handleChange}
+          />
         </div>
         <div className='mb-2'>
           <label>Celular</label>
-          <input type='text' className='form-control' name='cell_phone' value={formData.cell_phone || ''} onChange={handleChange} />
+          <input
+            type='text'
+            className='form-control'
+            name='cell_phone'
+            value={formData.cell_phone || ''}
+            onChange={handleChange}
+          />
         </div>
         <div className='mb-2'>
           <label>Email</label>
-          <input type='email' className='form-control' name='email' value={formData.email || ''} onChange={handleChange} />
+          <input
+            type='email'
+            className='form-control'
+            name='email'
+            value={formData.email || ''}
+            onChange={handleChange}
+          />
         </div>
         <div className='mb-2'>
           <label>Ciudad</label>
-          <input type='text' className='form-control' name='city' value={formData.city || ''} onChange={handleChange} />
+          <input
+            type='text'
+            className='form-control'
+            name='city'
+            value={formData.city || ''}
+            onChange={handleChange}
+          />
         </div>
         <div className='mb-2'>
           <label>País</label>
@@ -101,10 +170,17 @@ function AddProducer({ onProducerAdded }: Props) {
         </div>
         <div className='mb-2'>
           <label>Nota</label>
-          <textarea className='form-control' name='note' value={formData.note || ''} onChange={handleChange} />
+          <textarea
+            className='form-control'
+            name='note'
+            value={formData.note || ''}
+            onChange={handleChange}
+          />
         </div>
 
-        <button className='btn btn-primary' type='submit'>Guardar productor</button>
+        <button className='btn btn-primary' type='submit'>
+          Guardar productor
+        </button>
       </form>
     </div>
   );

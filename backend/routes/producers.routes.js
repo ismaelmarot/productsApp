@@ -8,6 +8,7 @@ router.post('/', (req, res) => {
     first_name,
     middle_name,
     last_name,
+    full_name,
     nickname,
     cell_phone,
     home_phone,
@@ -29,16 +30,17 @@ router.post('/', (req, res) => {
   const query = `
     INSERT INTO producers (
       first_name, middle_name, last_name,
-      nickname, cell_phone, home_phone, email,
-      address, city, state, country, zip_code,
+      full_name, nickname, cell_phone,
+      home_phone, email, address,
+      city, state, country, zip_code,
       website, social_media, note
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const params = [
     first_name, middle_name, last_name,
-    nickname, cell_phone, home_phone, email,
-    address, city, state, country, zip_code,
+    full_name, nickname, cell_phone, home_phone,
+    email, address, city, state, country, zip_code,
     website, social_media, note
   ];
 
@@ -84,7 +86,7 @@ router.patch('/:id', (req, res) => {
   const values = Object.values(updates);
 
   if (fields.length === 0) {
-    return res.status(400).json({ error: 'No hay campos para actualizar' });
+    return res.status(400).json({ error: "No hay campos para actualizar" });    
   }
 
   const setClause = fields.map(field => `${field} = ?`).join(', ');

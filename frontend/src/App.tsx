@@ -68,7 +68,7 @@ function App() {
 
   return (
     <>
-      <h1>GESTOR DE PRODUCTOS</h1>
+      <h1 style={{fontSize:'1.5rem'}}>GESTOR DE PRODUCTOS</h1>
       <div className='d-flex' style={{ height: '100vh' }}>
       
       {/*Menú lateral */}

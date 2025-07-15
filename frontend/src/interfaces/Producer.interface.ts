@@ -1,10 +1,10 @@
 export interface Producer {
   id?: string;
-  code?: string;
   first_name: string;
   middle_name?: string;
   last_name: string;
-  nickname?: string;
+  full_name?: string;
+  nickname?: '';
   cell_phone?: string;
   home_phone?: string;
   email?: string;
