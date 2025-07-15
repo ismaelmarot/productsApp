@@ -79,6 +79,22 @@ router.get('/:id', (req, res) => {
   });
 });
 
+// Obtain producers by full name
+router.get('/name/:full_name', (req, res) => {
+  const full_name = req.params.full_name;
+
+  db.get("SELECT * FROM producers WHERE full_name = ?", [full_name], (err, row) => {
+    if (err) {
+      console.error("Error al obtener productor:", err.message);
+      return res.status(500).json({ error: "Error interno del servidor" });
+    }
+    if (!row) {
+      return res.status(404).json({ error: "Productor no encontrado" });
+    }
+    res.json(row);
+  });
+});
+
 // U P D A T E
 router.patch('/:id', (req, res) => {
   const updates = req.body;
@@ -95,12 +111,12 @@ router.patch('/:id', (req, res) => {
   db.run(sql, [...values, req.params.id], function (err) {
     if (err) {
       console.error("Error al actualizar productor:", err.message);
-      return res.status(500).json({ error: 'Error de base de datos' });
+      return res.status(500).json({ error: "Error de base de datos" });
     }
     if (this.changes === 0) {
-      return res.status(404).json({ error: 'Productor no encontrado' });
+      return res.status(404).json({ error: "Productor no encontrado" });
     }
-    res.json({ message: 'Productor actualizado', changes: this.changes });
+    res.json({ message: "Productor actualizado", changes: this.changes });
   });
 });
 

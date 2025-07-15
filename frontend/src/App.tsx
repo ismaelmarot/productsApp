@@ -3,28 +3,29 @@ import Sidebar from './components/Sidebar/Sidebar';
 import type { Product } from './interfaces/Product.interface';
 import type { Producer } from './interfaces/Producer.interface';
 import AddProduct from './components/Product/AddProduct/AddProduct';
-import DeleteProduct from './components/Product/DeleteProduct/DeleteProduct';
 import DetailsProduct from './components/Product/DetailsProduct/DetailsProduct';
 import EditProduct from './components/Product/EditProduct/EditProduct';
 import ListProducts from './components/Product/ListProducts/ListProducts';
+import DeleteProduct from './components/Product/DeleteProduct/DeleteProduct';
 
 import AddProducer from './components/Producer/AddProducer/AddProducer';
 import DetailsProducer from './components/Producer/DetailsProducer/DetailsProducer';
+import EditProducer from './components/Producer/EditProducer/EditProducer';
 import ListProducers from './components/Producer/ListProducers/ListProducers';
+import DeleteProducer from './components/Producer/DeleteProducer/DeleteProducer';
 
 export type View =
   | 'products'
   | 'addProduct'
-  | 'deleteProduct'
   | 'detailsProduct'
-  | 'listProducts'
   | 'editProduct'
+  | 'listProducts'
+  | 'deleteProduct'
   | 'addProducer'
   | 'detailsProducer'
+  | 'editProducer'
   | 'listProducers'
   | 'deleteProducer'
-  | 'lugares';
-
 
 function App() {
   const [view, setView] = useState<View>('products');
@@ -78,6 +79,18 @@ function App() {
           />
         );
       
+      case 'deleteProducer':
+        return (
+          <DeleteProducer
+            onProducerDeleted={(name) => {
+              alert(`Productor eliminado: ${name}`);
+            }}
+          />
+        );
+
+      case 'deleteProducer':
+        return <DeleteProducer onProducerDeleted={() => {}} />;
+
       default:
         return null;
     }

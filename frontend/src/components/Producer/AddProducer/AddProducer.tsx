@@ -35,9 +35,11 @@ function AddProducer({ onProducerAdded }: Props) {
       return;
     }
 
-    // Generar full_name antes de enviar
-    const fullName = `${formData.first_name} ${formData.middle_name || ''} ${formData.last_name}`.trim();
-    const dataToSend = { ...formData, full_name: fullName };
+    const full_name = [formData.first_name, formData.middle_name, formData.last_name]
+      .filter(Boolean)
+      .join(' ');
+
+    const dataToSend = { ...formData, full_name };
 
     try {
       const res = await fetch('http://localhost:3001/api/producers', {
