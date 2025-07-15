@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { View } from './components/types/View';
+import type { View } from './types/View';
 import type { Product } from './interfaces/Product.interface';
 import type { Producer } from './interfaces/Producer.interface';
 import Sidebar from './components/Sidebar/Sidebar';

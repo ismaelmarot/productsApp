@@ -96,7 +96,7 @@
 // import type { Producer } from '../interfaces/Producer.interface';
 // import ProductViews from './Product/ProductViews';
 // import ProducerViews from './Producer/ProducerViews';
-import type { View } from '../../components/types/View';
+import type { View } from '../../types/View';
 import type { Producer } from '../../interfaces/Producer.interface';
 import type { Product } from '../../interfaces/Product.interface';
 import ProducerViews from '../ProducerView/ProducerView';

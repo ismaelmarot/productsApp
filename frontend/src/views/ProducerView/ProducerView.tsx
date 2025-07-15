@@ -3,18 +3,9 @@ import DeleteProducer from '../../components/Producer/DeleteProducer/DeleteProdu
 import DetailsProducer from '../../components/Producer/DetailsProducer/DetailsProducer';
 import EditProducer from '../../components/Producer/EditProducer/EditProducer';
 import ListProducers from '../../components/Producer/ListProducers/ListProducers';
-import type { View } from '../../components/types/View';
-import type { Producer } from '../../interfaces/Producer.interface';
+import type { ProducerViewProps } from '../../interfaces/ProducerView.interface';
 
-interface Props {
-  view: View;
-  setView: (view: View) => void;
-  selectedProducer: Producer | null;
-  setSelectedProducer: (p: Producer | null) => void;
-  onDone: () => void;
-}
-
-function ProducerViews({ view, setView, selectedProducer, setSelectedProducer, onDone }: Props) {
+function ProducerViews({ view, setView, selectedProducer, setSelectedProducer, onDone }: ProducerViewProps) {
   switch (view) {
     case 'addProducer':
       return <AddProducer onProducerAdded={onDone} />;
