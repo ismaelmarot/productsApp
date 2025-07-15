@@ -62,9 +62,10 @@ function App() {
 
       case 'addProducer':
         return <AddProducer onProducerAdded={handleDone} />;
-      case 'detailsProducer':
+      case 'editProducer':
+        return <EditProducer onUpdated={handleDone} />;
+        case 'detailsProducer':
         return <DetailsProducer />;
-
       case 'listProducers':
         return (
           <ListProducers

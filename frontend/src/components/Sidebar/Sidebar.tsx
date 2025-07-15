@@ -107,7 +107,17 @@ function Sidebar({ onChangeView }: Props) {
             </button>
           </div>
         </div>
-
+        <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
+          <div className='accordion-body' style={{ padding:'.5rem'}}>                  
+            <button
+              className='btn btn-link text-white'
+              style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+              onClick={() => onChangeView('editProducer')}
+            >
+              Editar Productor
+            </button>
+          </div>
+        </div>
 
        <div className='accordion-body' style={{ padding: '.5rem' }}>
         <button
