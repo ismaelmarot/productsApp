@@ -1,14 +1,6 @@
-import type { ChangeEvent } from 'react';
+import type { FormInputProductProps } from '../../../interfaces/FormInputProduct.interface';
 
-interface Props {
-    label: string;
-    type: string;
-    value: string | number;
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-    required?: boolean;
-}
-
-function FormInputProduct({ label, type, value, onChange, required = true }: Props) {
+function FormInputProduct({ label, type, value, onChange, required = true }: FormInputProductProps) {
     return (
         <div className='mb-3'>
             <label className='form-label'>{ label }:</label>

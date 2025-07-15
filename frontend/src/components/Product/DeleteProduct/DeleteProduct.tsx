@@ -1,8 +1,5 @@
 import { useState } from 'react';
-
-interface Props {
-    onProductDeleted: (deletedCode: string) => void;
-}
+import type { DeleteProductProps } from '../../../interfaces/DeleteProduct.interface';
 
 const renderSetData = (
     label: string,
@@ -22,7 +19,7 @@ const renderSetData = (
         </div>
     );
 
-function DeleteProduct({ onProductDeleted }: Props) {
+function DeleteProduct({ onProductDeleted }: DeleteProductProps) {
     const [code, setCode] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {

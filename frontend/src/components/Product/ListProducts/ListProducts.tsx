@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
+import type { ListProductsProps } from '../../../interfaces/ListProducts.interface';
 
-interface Props {
-  onViewProduct: (product: Product) => void;
-  onEditProduct: (product: Product) => void;
-}
-
-function ListProducts({ onViewProduct, onEditProduct }: Props) {
+function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

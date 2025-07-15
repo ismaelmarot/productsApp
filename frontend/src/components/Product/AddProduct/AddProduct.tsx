@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import type { Product } from '../../../interfaces/Product.interface';
+import type { AddProductProps } from '../../../interfaces/AddProduct.interface';
 import { Modal } from 'bootstrap'; 
 import SuccessModal from '../../SuccessModal/SuccessModal';
-interface Props {
-    onProductAdded: (newProduct: Product) => void;
-}
 
 const renderSetData = (
     label: string,
@@ -25,7 +22,7 @@ const renderSetData = (
     </div>
 );
 
-function AddProduct({ onProductAdded }: Props) {
+function AddProduct({ onProductAdded }: AddProductProps) {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [code, setCode] = useState('');

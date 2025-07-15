@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
 import { toInputDate } from '../../../utils/dateHelpers';
+import type { EditProductProps } from '../../../interfaces/EditProduct.interface';
 
-interface Props {
-  onUpdated: () => void;
-}
-
-function EditProduct({ onUpdated }: Props) {
+function EditProduct({ onUpdated }: EditProductProps) {
   const [productCode, setProductCode] = useState('');
   const [productData, setProductData] = useState<Product | null>(null);
   const [form, setForm] = useState<Partial<Product>>({});
