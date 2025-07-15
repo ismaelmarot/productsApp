@@ -6,7 +6,7 @@ interface Props {
   onEditProduct: (product: Product) => void;
 }
 
-function ProductList({ onViewProduct, onEditProduct }: Props) {
+function ListProducts({ onViewProduct, onEditProduct }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -74,4 +74,4 @@ function ProductList({ onViewProduct, onEditProduct }: Props) {
   );
 }
 
-export default ProductList;
+export default ListProducts;

@@ -108,12 +108,23 @@ function Sidebar({ onChangeView }: Props) {
           </div>
         </div>
 
+
+       <div className='accordion-body' style={{ padding: '.5rem' }}>
+        <button
+          className='btn btn-link text-white'
+          style={{ textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
+          onClick={() => onChangeView('listProducers')}
+        >
+          Ver listado Productores
+        </button>
+      </div>
+
         <div id='collapseOne' className='accordion-collapse collapse show' aria-labelledby='headingOne' data-bs-parent='#accordionExample'>
           <div className='accordion-body' style={{ padding:'.5rem'}}>  
             <button
               className='btn btn-link text-white'
               style={{  textDecoration: 'none', backgroundColor: 'black', width: '100%' }}
-              onClick={() => onChangeView('deleteProduct')}
+              onClick={() => onChangeView('deleteProducer')}
             >
               Eliminar Productor
             </button>
@@ -126,4 +137,3 @@ function Sidebar({ onChangeView }: Props) {
 }
 
 export default Sidebar;
-
