@@ -21,6 +21,8 @@ function App() {
             setView={setView}
             setSelectedProduct={setSelectedProduct}
             setSelectedProducer={setSelectedProducer}
+            selectedProduct={null}
+            selectedProducer={null}
           />
         </div>
       </div>

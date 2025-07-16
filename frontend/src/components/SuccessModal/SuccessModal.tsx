@@ -22,7 +22,7 @@ function SuccessModal({ show, onClose }: Props) {
       tabIndex={-1}
       ref={modalRef}
       aria-labelledby='successModalLabel'
-      aria-hidden='true'
+      aria-hidden={!show}
     >
       <div className='modal-dialog modal-dialog-centered'>
         <div className='modal-content'>
