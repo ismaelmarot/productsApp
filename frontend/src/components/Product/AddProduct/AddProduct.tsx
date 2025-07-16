@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import type { AddProductProps } from '../../../interfaces/AddProduct.interface';
 import { Modal } from 'bootstrap'; 
 import SuccessModal from '../../SuccessModal/SuccessModal';
+import { formatPriceHelper } from '../../../helpers/formatPriceHelper';
 
 const renderSetData = (
     label: string,
@@ -49,15 +50,16 @@ function AddProduct({ onProductAdded }: AddProductProps) {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        const toNumber = (v: string) => (v.trim() === '' ? null : parseFloat(v));
+  
+        const toNumber = (v: string) =>
+            v.trim() === '' ? null : parseFloat(v.replace(/\./g, '').replace(',', '.'));
 
         const toText = (v: string) => (v.trim() === '' ? null : v.trim());
 
         const newProduct = {
             code: toText(code),
             name: name.trim(),
-            price: parseFloat(price),
+            price: toNumber(price),
             category: toText(category),
             cost_price: toNumber(cost_price),
             sales_price: toNumber(sales_price),
@@ -119,9 +121,9 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             {renderSetData('Categoría', 'text', category, (e) => setCategory(e.target.value), true)}
             {renderSetData('Código', 'text', code, (e) => setCode(e.target.value), true)}
             {renderSetData('Fecha de Ingreso', 'date', incoming_date, (e) => setIncomingDate(e.target.value), true)}
-            {renderSetData('Precio de Costo', 'number', cost_price, (e) => setCostPrice(e.target.value), true)}
-            {renderSetData('Precio de Venta', 'number', sales_price, (e) => setSalesPrice(e.target.value), true)}
-            {renderSetData('Precio', 'number', price, (e) => setPrice(e.target.value), true)}
+            {renderSetData('Precio', 'text', price, (e) => setPrice(formatPriceHelper(e.target.value)), true)}
+            {renderSetData('Precio de Costo', 'text', cost_price, (e) => setCostPrice(formatPriceHelper(e.target.value)), true)}
+            {renderSetData('Precio de Venta', 'text', sales_price, (e) => setSalesPrice(formatPriceHelper(e.target.value)), true)}
             {renderSetData('Nota', 'text', note, (e) => setNote(e.target.value))}
             {/* {renderSetData('Precio Vendido', 'number', sold_price, (e) => setSoldPrice(e.target.value))} */}
             {/* {renderSetData('Fecha de Salida', 'date', outgoing_date, (e) => setOutgoingDate(e.target.value), true)} */}

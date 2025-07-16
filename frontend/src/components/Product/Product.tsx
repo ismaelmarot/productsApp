@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Product } from '../../interfaces/Product.interface';
 import AddProduct from './AddProduct/AddProduct';
+import { formatPriceToEuropeanTipeHelper } from '../../helpers/formatPriceToEuroeanTipeHelper';
 
 
 function Products() {
@@ -24,7 +25,7 @@ function Products() {
             <ul className='list-group'>
                 {products.map((product) => (
                     <li key={product.id} className='list-group-item'>
-                        <strong>{ product.name }</strong> - ${ product.price }
+                        <strong>{product.name}</strong> - {formatPriceToEuropeanTipeHelper(product.price)}
                     </li>
                 ))}
             </ul>
