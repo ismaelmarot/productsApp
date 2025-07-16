@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
-import { toInputDate } from '../../../utils/dateHelpers';
+import { toInputDate } from '../../../helpers/dateHelpers';
 import type { EditProductProps } from '../../../interfaces/EditProduct.interface';
 
 function EditProduct({ onUpdated }: EditProductProps) {

@@ -46,7 +46,7 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
             <tr key={p.id}>
               <td>{p.code}</td>
               <td>{p.name}</td>
-              <td>${p.price}</td>
+              <td>$ {p.price}</td>
               <td>{p.category || '-'}</td>
               <td>
                 <button
