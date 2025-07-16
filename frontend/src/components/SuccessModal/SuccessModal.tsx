@@ -10,19 +10,27 @@ function SuccessModal({ show, onClose }: Props) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    if (modalRef.current) {
-      const modal = Modal.getOrCreateInstance(modalRef.current);
-      show ? modal.show() : modal.hide();
-    }
+    if (!show || !modalRef.current) return;
+
+    const modal = Modal.getOrCreateInstance(modalRef.current);
+    modal.show();
+
+    return () => {
+      modal.hide();
+    };
   }, [show]);
+
+  if (!show) return null;
 
   return (
     <div
-      className='modal fade'
+      className='modal fade show'
       tabIndex={-1}
       ref={modalRef}
       aria-labelledby='successModalLabel'
-      aria-hidden={!show}
+      aria-modal='true'
+      role='dialog'
+      style={{ display: 'block' }}
     >
       <div className='modal-dialog modal-dialog-centered'>
         <div className='modal-content'>
@@ -41,7 +49,7 @@ function SuccessModal({ show, onClose }: Props) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default SuccessModal;
