@@ -1,12 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Modal } from 'bootstrap';
+import type { SuccessModalProps } from '../../interfaces/SuccessModal.interface';
 
-interface Props {
-  show: boolean;
-  onClose: () => void;
-}
-
-function SuccessModal({ show, onClose }: Props) {
+function SuccessModal({ show, onClose }: SuccessModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
