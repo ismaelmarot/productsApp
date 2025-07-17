@@ -3,6 +3,7 @@ import type { Product } from '../../../interfaces/Product.interface';
 import type { ListProductsProps } from '../../../interfaces/ListProducts.interface';
 import SortBar from '../../SortBar/SortBar';
 import useSortedProducts from '../../../hooks/useSortedProducts';
+import { getProducts } from '../../../api/products.api';
 
 function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
   const [products, setProducts] = useState<Product[]>([]);
@@ -15,9 +16,7 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/products');
-        if (!res.ok) throw new Error("Error al cargar productos");
-        const data = await res.json();
+        const data = await getProducts();
         setProducts(data);
       } catch (err: any) {
         setError(err.message || "Error desconocido");

@@ -2,15 +2,14 @@ import { useEffect, useState } from 'react';
 import type { Product } from '../../interfaces/Product.interface';
 import AddProduct from './AddProduct/AddProduct';
 import { formatPriceToEuropeanTipeHelper } from '../../helpers/formatPriceToEuroeanTipeHelper';
-
+import * as productsApi from '../../api/products.api.ts';
 
 function Products() {
     const [products, setProducts] = useState<Product[]>([]);
 
     useEffect(() => {
-        fetch('http://localhost:3001/api/products')
-            .then((response) => response.json())
-            .then((data) => setProducts(data))
+        productsApi.getProducts()
+            .then(setProducts)
             .catch((error) => console.error("Error fetching products:", error));
     }, []);
 
