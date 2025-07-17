@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
 import type { ListProductsProps } from '../../../interfaces/ListProducts.interface';
-import SortBar from '../../SortBar/SortBart';
+import SortBar from '../../SortBar/SortBar';
 import useSortedProducts from '../../../hooks/useSortedProducts';
 
 function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
@@ -16,11 +16,11 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
     const fetchProducts = async () => {
       try {
         const res = await fetch('http://localhost:3001/api/products');
-        if (!res.ok) throw new Error('Error al cargar productos');
+        if (!res.ok) throw new Error("Error al cargar productos");
         const data = await res.json();
         setProducts(data);
       } catch (err: any) {
-        setError(err.message || 'Error desconocido');
+        setError(err.message || "Error desconocido");
       } finally {
         setLoading(false);
       }
@@ -32,11 +32,11 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
   const sortedProducts = useSortedProducts(products, sortBy, sortOrder);
 
   if (loading) return <p>Cargando productos...</p>;
-  if (error) return <p className="text-danger">{error}</p>;
+  if (error) return <p className='text-danger'>{error}</p>;
   if (products.length === 0) return <p>No hay productos disponibles.</p>;
 
   return (
-    <div className="container">
+    <div className='container'>
       <h2>Listado de productos</h2>
       <SortBar
         sortBy={sortBy}
@@ -45,7 +45,7 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
         onChangeSortOrder={(v) => setSortOrder(v as any)}
       />
 
-      <table className="table table-striped">
+      <table className='table table-striped'>
         <thead>
           <tr>
             <th>Código</th>
@@ -64,13 +64,13 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
               <td>{p.category || '-'}</td>
               <td>
                 <button
-                  className="btn btn-sm btn-primary me-2"
+                  className='btn btn-sm btn-primary me-2'
                   onClick={() => onViewProduct(p)}
                 >
                   Ver
                 </button>
                 <button
-                  className="btn btn-sm btn-warning"
+                  className='btn btn-sm btn-warning'
                   onClick={() => onEditProduct(p)}
                 >
                   Editar
