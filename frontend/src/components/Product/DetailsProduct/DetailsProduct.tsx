@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
 import FormatPrice from '../../FormattedPriceInput/FormatPrice';
 import FormatDate from '../../FormatDate/FormatDate';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
 
 function DetailsProduct() {
     const [productCode, setProductCode] = useState('');
@@ -52,7 +53,7 @@ function DetailsProduct() {
                     type='text'
                     className='form-control'
                     value={productCode}
-                    onChange={e => setProductCode(e.target.value)}
+                    onChange={e => setProductCode(toUppercaseHelper(e.target.value))}
                 />
             </div>
 
