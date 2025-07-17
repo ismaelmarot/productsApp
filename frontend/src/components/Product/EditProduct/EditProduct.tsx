@@ -44,6 +44,10 @@ function EditProduct({ onUpdated }: EditProductProps) {
     if (!productData) return;
 
     try {
+      if (productData.id === undefined) {
+        alert("El producto no tiene un ID válido");
+        return;
+      }
       await patchProduct(productData.id, form);
       alert("Producto actualizado correctamente");
       onUpdated();
