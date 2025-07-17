@@ -1,0 +1,53 @@
+const express = require('express');
+const router = express.Router();
+const db = require('../db/database');
+
+// G E T
+router.get('/', (req, res) => {
+  db.all('SELECT * FROM categories', [], (err, rows) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json(rows);
+    }
+  });
+});
+
+// C R E A T E
+router.post('/', (req, res) => {
+  const { name } = req.body;
+  db.run('INSERT INTO categories (name) VALUES (?)', [name], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.status(201).json({ id: this.lastID, name });
+    }
+  });
+});
+
+// E D I T
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const { name } = req.body;
+  db.run('UPDATE categories SET name = ? WHERE id = ?', [name, id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json({ id, name });
+    }
+  });
+});
+
+// D E L E T E
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  db.run('DELETE FROM categories WHERE id = ?', [id], function (err) {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else {
+      res.json({ deleted: this.changes > 0 });
+    }
+  });
+});
+
+module.exports = router;
