@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
 import { toInputDate } from '../../../helpers/dateHelpers';
 import type { EditProductProps } from '../../../interfaces/EditProduct.interface';
+import { getProductByCode, patchProduct } from '../../../api/products.api';
 
 function EditProduct({ onUpdated }: EditProductProps) {
   const [productCode, setProductCode] = useState('');
@@ -10,7 +11,6 @@ function EditProduct({ onUpdated }: EditProductProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Sync product data to form state
   useEffect(() => {
     if (productData) setForm(productData);
   }, [productData]);
@@ -20,9 +20,7 @@ function EditProduct({ onUpdated }: EditProductProps) {
     setError(null);
 
     try {
-      const res = await fetch(`http://localhost:3001/api/products/code/${productCode}`);
-      if (!res.ok) throw new Error('Producto no encontrado');
-      const data = await res.json();
+      const data = await getProductByCode(productCode);
       setProductData(data);
     } catch (err: any) {
       setError(err.message || 'Error al cargar producto');
@@ -45,14 +43,7 @@ function EditProduct({ onUpdated }: EditProductProps) {
     if (!productData) return;
 
     try {
-      const res = await fetch(`http://localhost:3001/api/products/${productData.id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-
-      if (!res.ok) throw new Error('Error al actualizar producto');
-
+      await patchProduct(productData.id, form);
       alert('Producto actualizado correctamente');
       onUpdated();
     } catch (err) {
@@ -64,7 +55,6 @@ function EditProduct({ onUpdated }: EditProductProps) {
     <div className='container'>
       <h2>Editar Producto</h2>
 
-      {/* Ingreso de Código */}
       {!productData && (
         <form
           className='mb-4'
@@ -88,7 +78,6 @@ function EditProduct({ onUpdated }: EditProductProps) {
         </form>
       )}
 
-      {/* Edition Form */}
       {productData && (
         <form onSubmit={handleSubmit}>
           <div className='mb-3'>
@@ -114,6 +103,7 @@ function EditProduct({ onUpdated }: EditProductProps) {
               required
             />
           </div>
+
           <div className='mb-3'>
             <label className='form-label'>Fecha de ingreso</label>
             <input
