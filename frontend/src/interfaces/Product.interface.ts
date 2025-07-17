@@ -1,10 +1,9 @@
 export interface Product {
-    id: number;
+    id?: number;
     code: string;
     name: string;
     price: number;
     category: string;
-    // craftsman: string;
     cost_price: number;
     sales_price: number;
     sold_price: number;

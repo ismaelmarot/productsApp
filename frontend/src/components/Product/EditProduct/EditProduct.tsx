@@ -24,7 +24,7 @@ function EditProduct({ onUpdated }: EditProductProps) {
       const data = await getProductByCode(productCode);
       setProductData(data);
     } catch (err: any) {
-      setError(err.message || 'Error al cargar producto');
+      setError(err.message || "Error al cargar producto");
       setProductData(null);
     } finally {
       setLoading(false);
@@ -45,10 +45,10 @@ function EditProduct({ onUpdated }: EditProductProps) {
 
     try {
       await patchProduct(productData.id, form);
-      alert('Producto actualizado correctamente');
+      alert("Producto actualizado correctamente");
       onUpdated();
     } catch (err) {
-      alert('Error al actualizar producto');
+      alert("Error al actualizar producto");
     }
   };
 
