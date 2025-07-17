@@ -3,6 +3,7 @@ import type { AddProductProps } from '../../../interfaces/AddProduct.interface';
 import { Modal } from 'bootstrap'; 
 import SuccessModal from '../../SuccessModal/SuccessModal';
 import { formatPriceHelper } from '../../../helpers/formatPriceHelper';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
 
 const renderSetData = (
     label: string,
@@ -123,7 +124,7 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             <h2>Agregar un nuevo producto</h2>
             {renderSetData('Nombre', 'text', name, (e) => setName(e.target.value), true)}
             {renderSetData('Categoría', 'text', category, (e) => setCategory(e.target.value), true)}
-            {renderSetData('Código', 'text', code, (e) => setCode(e.target.value), true)}
+            {renderSetData('Código', 'text', code, (e) => setCode(toUppercaseHelper(e.target.value)), true)}
             {renderSetData('Fecha de Ingreso', 'date', incoming_date, (e) => setIncomingDate(e.target.value), true)}
             {renderSetData('Precio', 'text', price, (e) => setPrice(formatPriceHelper(e.target.value)), true)}
             {renderSetData('Precio de Costo', 'text', cost_price, (e) => setCostPrice(formatPriceHelper(e.target.value)), true)}
