@@ -3,6 +3,7 @@ import type { Product } from '../../../interfaces/Product.interface';
 import { toInputDate } from '../../../helpers/dateHelpers';
 import type { EditProductProps } from '../../../interfaces/EditProduct.interface';
 import { getProductByCode, patchProduct } from '../../../api/products.api';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
 
 function EditProduct({ onUpdated }: EditProductProps) {
   const [productCode, setProductCode] = useState('');
@@ -68,7 +69,7 @@ function EditProduct({ onUpdated }: EditProductProps) {
             type='text'
             className='form-control mb-2'
             value={productCode}
-            onChange={(e) => setProductCode(e.target.value)}
+            onChange={(e) => setProductCode(toUppercaseHelper(e.target.value))}
             required
           />
           <button className='btn btn-primary' type='submit' disabled={loading}>
