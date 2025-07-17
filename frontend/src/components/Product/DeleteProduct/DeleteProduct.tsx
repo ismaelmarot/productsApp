@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { DeleteProductProps } from '../../../interfaces/DeleteProduct.interface';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
 
 const renderSetData = (
     label: string,
@@ -62,7 +63,7 @@ function DeleteProduct({ onProductDeleted }: DeleteProductProps) {
     return (
         <form onSubmit={handleSubmit} className='mb-4'>
         <h2>Eliminar producto existente por ID</h2>
-        {renderSetData('ID', 'text', code, (e) => setCode(e.target.value))}
+        {renderSetData('ID', 'text', code, (e) => setCode(toUppercaseHelper(e.target.value)))}
         <button type='submit' className='btn btn-danger'>
             Eliminar
         </button>
