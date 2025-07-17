@@ -72,7 +72,11 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             note: toText(note),
         };
 
-        if (!newProduct.name || isNaN(newProduct.price)) {
+        if (
+            !newProduct.name ||
+            newProduct.price === null ||
+            isNaN(newProduct.price)
+        ) {
             alert("Nombre y precio son obligatorios");
             return;
         }
