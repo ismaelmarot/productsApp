@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import type { Producer } from '../../../interfaces/Producer.interface';
+import type { EditProducerProps } from '../../../interfaces/EditProducer.interface';
 
-interface Props {
-  onUpdated: () => void;
-}
-
-function EditProducer({ onUpdated }: Props) {
+function EditProducer({ onUpdated }: EditProducerProps) {
   const [producerId, setProducerId] = useState('');
   const [producerData, setProducerData] = useState<Producer | null>(null);
   const [form, setForm] = useState<Partial<Producer>>({});
