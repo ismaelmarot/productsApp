@@ -8,6 +8,7 @@ function createProducersTable() {
     last_name TEXT NOT NULL,
     full_name TEXT NOT NULL,
     nickname TEXT,
+    category TEXT,
     cell_phone TEXT,
     home_phone TEXT,
     email TEXT,

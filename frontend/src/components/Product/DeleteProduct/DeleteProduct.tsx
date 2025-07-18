@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { DeleteProductProps } from '../../../interfaces/DeleteProduct.interface';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
 
 const renderSetData = (
     label: string,

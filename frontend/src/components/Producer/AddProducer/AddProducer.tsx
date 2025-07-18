@@ -57,6 +57,7 @@ function AddProducer({ onProducerAdded }: Props) {
         last_name: '',
         full_name: '',
         nickname: '',
+        category: '',
         cell_phone: '',
         home_phone: '',
         email: '',
@@ -121,6 +122,16 @@ function AddProducer({ onProducerAdded }: Props) {
             className='form-control'
             name='nickname'
             value={formData.nickname || ''}
+            onChange={handleChange}
+          />
+        </div>
+        <div className='mb-2'>
+          <label>Categoría</label>
+          <input
+            type='text'
+            className='form-control'
+            name='category'
+            value={formData.category || ''}
             onChange={handleChange}
           />
         </div>

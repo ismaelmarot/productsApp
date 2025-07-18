@@ -10,6 +10,7 @@ router.post('/', (req, res) => {
     last_name,
     full_name,
     nickname,
+    category,
     cell_phone,
     home_phone,
     email,
@@ -30,16 +31,16 @@ router.post('/', (req, res) => {
   const query = `
     INSERT INTO producers (
       first_name, middle_name, last_name,
-      full_name, nickname, cell_phone,
-      home_phone, email, address,
-      city, state, country, zip_code,
+      full_name, nickname, category, 
+      cell_phone,home_phone, email,
+      address, city, state, country, zip_code,
       website, social_media, note
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const params = [
-    first_name, middle_name, last_name,
-    full_name, nickname, cell_phone, home_phone,
+    first_name, middle_name, last_name, full_name,
+    nickname, category, cell_phone, home_phone,
     email, address, city, state, country, zip_code,
     website, social_media, note
   ];

@@ -3,9 +3,9 @@ import type { AddProductProps } from '../../../interfaces/AddProduct.interface';
 import { Modal } from 'bootstrap'; 
 import SuccessModal from '../../SuccessModal/SuccessModal';
 import { formatPriceHelper } from '../../../helpers/formatPriceHelper';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
 import { getTodayDate } from '../../../helpers/getTodayDate';
-import { isValidCode } from '../../../helpers/codeValidator';
+import { codeValidatorHelper } from '../../../helpers/codeValidatorHelper';
 
 const renderSetData = (
     label: string,
@@ -79,7 +79,7 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             note: toText(note),
         };
 
-        if (!isValidCode(code)) {
+        if (!codeValidatorHelper(code)) {
             alert("El código debe tener el formato AAA000 hasta ZZZ999 (3 letras + 3 números)");
             return;
         }

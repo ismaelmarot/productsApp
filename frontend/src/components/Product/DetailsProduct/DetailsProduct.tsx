@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
 import FormatPrice from '../../FormattedPriceInput/FormatPrice';
 import FormatDate from '../../FormatDate/FormatDate';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
 
 function DetailsProduct() {
     const [productCode, setProductCode] = useState('');

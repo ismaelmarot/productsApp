@@ -5,6 +5,7 @@ export interface Producer {
   last_name: string;
   full_name?: string;
   nickname?: '';
+  category?: string;
   cell_phone?: string;
   home_phone?: string;
   email?: string;

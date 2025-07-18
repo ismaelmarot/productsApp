@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import type { Product } from '../../../interfaces/Product.interface';
-import { toInputDate } from '../../../helpers/dateHelpers';
+import { toInputDate } from '../../../helpers/dateHelper';
 import type { EditProductProps } from '../../../interfaces/EditProduct.interface';
 import { getProductByCode, patchProduct } from '../../../api/products.api';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
 
 function EditProduct({ onUpdated }: EditProductProps) {
   const [productCode, setProductCode] = useState('');
