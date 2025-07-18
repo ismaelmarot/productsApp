@@ -6,24 +6,28 @@ interface Props {
 }
 
 function EditProducer({ onUpdated }: Props) {
-  const [fullName, setFullName] = useState('');
+  const [producerId, setProducerId] = useState('');
   const [producerData, setProducerData] = useState<Producer | null>(null);
   const [form, setForm] = useState<Partial<Producer>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Sync producer data to form state
   useEffect(() => {
     if (producerData) setForm(producerData);
   }, [producerData]);
+
+  useEffect(() => {
+    const { first_name = '', last_name = '', nickname = '' } = form;
+    const fullNameValue = [first_name, nickname, last_name].filter(Boolean).join(' ').trim();
+    setForm(prev => ({ ...prev, full_name: fullNameValue }));
+  }, [form.first_name, form.last_name, form.nickname]);
 
   const fetchProducer = async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const encodedName = encodeURIComponent(fullName.trim());
-      const res = await fetch(`http://localhost:3001/api/producers/name/${encodedName}`);
+      const res = await fetch(`http://localhost:3001/api/producers/${producerId}`);
       if (!res.ok) throw new Error('Productor no encontrado');
       const data = await res.json();
       setProducerData(data);
@@ -67,7 +71,7 @@ function EditProducer({ onUpdated }: Props) {
     <div className='container'>
       <h2>Editar Productor</h2>
 
-      {/* Ingreso de Nombre completo */}
+      {/* Ingreso de ID */}
       {!producerData && (
         <form
           className='mb-4'
@@ -76,12 +80,12 @@ function EditProducer({ onUpdated }: Props) {
             fetchProducer();
           }}
         >
-          <label className='form-label'>Nombre completo del productor:</label>
+          <label className='form-label'>ID del productor:</label>
           <input
-            type='text'
+            type='number'
             className='form-control mb-2'
-            value={fullName}
-            onChange={(e) => setFullName(e.target.value)}
+            value={producerId}
+            onChange={(e) => setProducerId(e.target.value)}
             required
           />
           <button className='btn btn-primary' type='submit' disabled={loading}>
@@ -103,6 +107,17 @@ function EditProducer({ onUpdated }: Props) {
               value={form.first_name || ''}
               onChange={handleChange}
               required
+            />
+          </div>
+
+          <div className='mb-3'>
+            <label className='form-label'>Segundo Nombre</label>
+            <input
+              name='middle_name'
+              type='text'
+              className='form-control'
+              value={form.middle_name || ''}
+              onChange={handleChange}
             />
           </div>
 

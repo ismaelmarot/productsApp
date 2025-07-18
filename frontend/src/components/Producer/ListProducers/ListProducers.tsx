@@ -42,6 +42,7 @@ function ListProducers({ onViewProducer, onEditProducer }: Props) {
             <th>Nombre completo</th>
             <th>Email</th>
             <th>Teléfono</th>
+            <th>Categoría</th>
             <th>Opciones</th>
           </tr>
         </thead>
@@ -52,6 +53,7 @@ function ListProducers({ onViewProducer, onEditProducer }: Props) {
               <td>{p.full_name}</td>
               <td>{p.email || '-'}</td>
               <td>{p.cell_phone || '-'}</td>
+              <td>{p.category || '_'}</td>
               <td>
                 <button
                   className='btn btn-sm btn-primary me-2'

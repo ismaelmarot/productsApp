@@ -60,6 +60,7 @@ function DetailsProducer() {
             <h5 className='card-title text-center mb-4'>Detalles del Productor</h5>
             <p><strong>Nombre completo:</strong> {producer.first_name} {producer.middle_name ?? ''} {producer.last_name}</p>
             <p><strong>Apodo:</strong> {producer.nickname || '-'}</p>
+            <p><strong>Categoría:</strong> {producer.category || '_'}</p>
             <p><strong>Celular:</strong> {producer.cell_phone || '-'}</p>
             <p><strong>Teléfono fijo:</strong> {producer.home_phone || '-'}</p>
             <p><strong>Email:</strong> {producer.email || '-'}</p>
