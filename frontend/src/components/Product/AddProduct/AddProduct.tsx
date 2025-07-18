@@ -5,13 +5,15 @@ import SuccessModal from '../../SuccessModal/SuccessModal';
 import { formatPriceHelper } from '../../../helpers/formatPriceHelper';
 import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
 import { getTodayDate } from '../../../helpers/getTodayDate';
+import { isValidCode } from '../../../helpers/codeValidator';
 
 const renderSetData = (
     label: string,
     type: string,
     value: string | number,
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
-    required: boolean = false
+    required: boolean = false,
+    placeholder?: string
 ) => (
     <div className='mb-3'>
         <label className='form-label'>{ label }:</label>
@@ -21,6 +23,7 @@ const renderSetData = (
             value={ value }
             onChange={ onChange }
             required={ required }
+            placeholder={ placeholder }
         />
     </div>
 );
@@ -76,6 +79,11 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             note: toText(note),
         };
 
+        if (!isValidCode(code)) {
+            alert("El código debe tener el formato AAA000 hasta ZZZ999 (3 letras + 3 números)");
+            return;
+        }
+
         if (
             !newProduct.name ||
             newProduct.price === null ||
@@ -127,7 +135,7 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             <h2>Agregar un nuevo producto</h2>
             {renderSetData('Nombre', 'text', name, (e) => setName(e.target.value), true)}
             {renderSetData('Categoría', 'text', category, (e) => setCategory(e.target.value), true)}
-            {renderSetData('Código', 'text', code, (e) => setCode(toUppercaseHelper(e.target.value)), true)}
+            {renderSetData('Código', 'text', code, (e) => setCode(toUppercaseHelper(e.target.value.slice(0, 6))), true, "De AAA000 hasta ZZZ999")}
             {renderSetData('Fecha de Ingreso', 'date', incoming_date, (e) => setIncomingDate(e.target.value), true)}
             {renderSetData('Precio', 'text', price, (e) => setPrice(formatPriceHelper(e.target.value)), true)}
             {renderSetData('Precio de Costo', 'text', cost_price, (e) => setCostPrice(formatPriceHelper(e.target.value)), true)}
