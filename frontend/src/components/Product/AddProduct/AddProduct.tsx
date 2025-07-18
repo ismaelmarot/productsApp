@@ -4,6 +4,7 @@ import { Modal } from 'bootstrap';
 import SuccessModal from '../../SuccessModal/SuccessModal';
 import { formatPriceHelper } from '../../../helpers/formatPriceHelper';
 import { toUppercaseHelper } from '../../../helpers/toUppercaseHlper';
+import { getTodayDate } from '../../../helpers/getTodayDate';
 
 const renderSetData = (
     label: string,
@@ -32,12 +33,14 @@ function AddProduct({ onProductAdded }: AddProductProps) {
     const [cost_price, setCostPrice] = useState('');
     const [sales_price, setSalesPrice] = useState('');
     const [sold_price, setSoldPrice] = useState('');
-    const [incoming_date, setIncomingDate] = useState('');
+    // const [incoming_date, setIncomingDate] = useState('');
     const [outgoing_date, setOutgoingDate] = useState('');
     const [reason_outgoing, setReasonOutgoing] = useState('');
     const [payment_date, setPaymentDate] = useState('');
     const [payment_method, setPaymentMethod] = useState('');
     const [note, setNote] = useState('');
+    const [incoming_date, setIncomingDate] = useState(getTodayDate());
+
 
     const [showModal, setShowModal] = useState(false);
     const modalRef = useRef<HTMLDivElement | null>(null);
