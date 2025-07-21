@@ -9,4 +9,5 @@ export type View =
   | 'detailsProducer'
   | 'editProducer'
   | 'listProducers'
-  | 'deleteProducer';
+  | 'deleteProducer'
+  | 'addCategory';

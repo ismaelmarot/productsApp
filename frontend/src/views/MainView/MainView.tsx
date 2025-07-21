@@ -1,6 +1,7 @@
+import type { MainViewProps } from '../../interfaces/MainView.interface';
 import ProducerViews from '../ProducerView/ProducerView';
 import ProductViews from '../ProductView/ProductView';
-import type { MainViewProps } from '../../interfaces/MainView.interface';
+import CategoryViews from '../CategoryView/CategoryView';
 
 function MainView({
   view,
@@ -8,7 +9,9 @@ function MainView({
   selectedProduct,
   setSelectedProduct,
   selectedProducer,
-  setSelectedProducer
+  setSelectedProducer,
+  selectedCategory,
+  setSelectedCategory,
 }: MainViewProps) {
   const handleDone = () => setView('products');
 
@@ -32,6 +35,18 @@ function MainView({
           setView={setView}
           selectedProducer={selectedProducer}
           setSelectedProducer={setSelectedProducer}
+          onDone={handleDone}
+        />
+      );
+    }
+
+    if (view.includes('Category')) {
+      return (
+        <CategoryViews
+          view={view}
+          setView={setView}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
           onDone={handleDone}
         />
       );

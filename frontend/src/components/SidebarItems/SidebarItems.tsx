@@ -15,3 +15,7 @@ export const producerItems: { label: string; view: View }[] = [
   { label: 'Ver listado Productores', view: 'listProducers' },
   { label: 'Eliminar Productor', view: 'deleteProducer' },
 ];
+
+export const categoryItems: { label: string; view: View }[] = [
+  { label: 'Agregar Categoría', view: 'addCategory' },
+];
