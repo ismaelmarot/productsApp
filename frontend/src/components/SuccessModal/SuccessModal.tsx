@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Modal } from 'bootstrap';
 import type { SuccessModalProps } from '../../interfaces/SuccessModal.interface';
 
-function SuccessModal({ show, onClose }: SuccessModalProps) {
+function SuccessModal({ show, onClose, message }: SuccessModalProps) {
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -31,11 +31,11 @@ function SuccessModal({ show, onClose }: SuccessModalProps) {
       <div className='modal-dialog modal-dialog-centered'>
         <div className='modal-content'>
           <div className='modal-header'>
-            <h5 className='modal-title' id='successModalLabel'>Producto Agregado</h5>
+            <h5 className='modal-title' id='successModalLabel'>Agregado</h5>
             <button type='button' className='btn-close' onClick={onClose}></button>
           </div>
           <div className='modal-body'>
-            El producto fue agregado correctamente.
+            { message }
           </div>
           <div className='modal-footer'>
             <button type='button' className='btn btn-secondary' onClick={onClose}>

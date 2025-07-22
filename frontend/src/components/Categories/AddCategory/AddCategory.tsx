@@ -20,6 +20,7 @@ const AddCategory = ({ onCategoryAdded }: AddCategoryProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setShowModal(true);
 
     if (!id.trim() || !name.trim()) {
       alert("ID y Nombre son obligatorios");
@@ -100,7 +101,7 @@ const AddCategory = ({ onCategoryAdded }: AddCategoryProps) => {
         </button>
       </form>
 
-      <SuccessModal show={showModal} onClose={() => setShowModal(false)} />
+      <SuccessModal show={showModal} onClose={() => setShowModal(false)} message="CATEGORÍA agregada correctamente." />
     </>
   );
 };

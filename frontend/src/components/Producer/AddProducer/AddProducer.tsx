@@ -1,26 +1,18 @@
 import { useState } from 'react';
+import { initialProducerData } from '../../../constants/initialProducerData';
 import type { Producer } from '../../../interfaces/Producer.interface';
-import { countries } from '../../../utils/countries';
+import { useSuccessModal } from '../../../hooks/useSuccessModal';
+import ProducerFormFields from '../ProducerForm/ProducerFormFields/ProducerFormFields';
+import SuccessModal from '../../SuccessModal/SuccessModal';
+import type { AddProducerProps } from '../../../interfaces/AddProducer.interface';
 
-interface Props {
-  onProducerAdded: () => void;
-}
-
-function AddProducer({ onProducerAdded }: Props) {
-  const [formData, setFormData] = useState<Producer>({
-    first_name: '',
-    middle_name: '',
-    last_name: '',
-    country: 'Argentina',
-    full_name: '',
-  });
-
+function AddProducer({ onProducerAdded }: AddProducerProps) {
+  const [formData, setFormData] = useState<Producer>(initialProducerData);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<boolean>(false);
+  const { showModal, setShowModal, modalRef } = useSuccessModal();
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<any>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -28,17 +20,13 @@ function AddProducer({ onProducerAdded }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setSuccess(false);
 
     if (!formData.first_name || !formData.last_name) {
       setError('Nombre y apellido son obligatorios');
       return;
     }
 
-    const full_name = [formData.first_name, formData.middle_name, formData.last_name]
-      .filter(Boolean)
-      .join(' ');
-
+    const full_name = [formData.first_name, formData.middle_name, formData.last_name].filter(Boolean).join(' ');
     const dataToSend = { ...formData, full_name };
 
     try {
@@ -48,31 +36,14 @@ function AddProducer({ onProducerAdded }: Props) {
         body: JSON.stringify(dataToSend),
       });
 
-      if (!res.ok) throw new Error('Error al crear productor');
+      if (!res.ok) throw new Error("Error al crear productor");
 
       setSuccess(true);
-      setFormData({
-        first_name: '',
-        middle_name: '',
-        last_name: '',
-        full_name: '',
-        nickname: '',
-        category: '',
-        cell_phone: '',
-        home_phone: '',
-        email: '',
-        address: '',
-        city: '',
-        state: '',
-        country: 'Argentina',
-        zip_code: '',
-        website: '',
-        social_media: '',
-        note: '',
-      });
+      setShowModal(true);
+      setFormData(initialProducerData);
       onProducerAdded();
     } catch (err: any) {
-      setError(err.message || 'Error desconocido');
+      setError(err.message || "Error desconocido");
     }
   };
 
@@ -81,120 +52,13 @@ function AddProducer({ onProducerAdded }: Props) {
       <h2>Agregar productor</h2>
       {error && <p className='text-danger'>{error}</p>}
       {success && <p className='text-success'>Productor creado correctamente.</p>}
-
       <form onSubmit={handleSubmit}>
-        <div className='mb-2'>
-          <label>Nombre *</label>
-          <input
-            type='text'
-            className='form-control'
-            name='first_name'
-            value={formData.first_name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className='mb-2'>
-          <label>Segundo nombre</label>
-          <input
-            type='text'
-            className='form-control'
-            name='middle_name'
-            value={formData.middle_name || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-2'>
-          <label>Apellido *</label>
-          <input
-            type='text'
-            className='form-control'
-            name='last_name'
-            value={formData.last_name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className='mb-2'>
-          <label>Apodo</label>
-          <input
-            type='text'
-            className='form-control'
-            name='nickname'
-            value={formData.nickname || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-2'>
-          <label>Categoría</label>
-          <input
-            type='text'
-            className='form-control'
-            name='category'
-            value={formData.category || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-2'>
-          <label>Celular</label>
-          <input
-            type='text'
-            className='form-control'
-            name='cell_phone'
-            value={formData.cell_phone || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-2'>
-          <label>Email</label>
-          <input
-            type='email'
-            className='form-control'
-            name='email'
-            value={formData.email || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-2'>
-          <label>Ciudad</label>
-          <input
-            type='text'
-            className='form-control'
-            name='city'
-            value={formData.city || ''}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='mb-2'>
-          <label>País</label>
-          <select
-            className='form-control'
-            name='country'
-            value={formData.country}
-            onChange={handleChange}
-          >
-            <option value=''>Seleccionar país</option>
-            {countries.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className='mb-2'>
-          <label>Nota</label>
-          <textarea
-            className='form-control'
-            name='note'
-            value={formData.note || ''}
-            onChange={handleChange}
-          />
-        </div>
-
+        <ProducerFormFields formData={formData} handleChange={handleChange} />
         <button className='btn btn-primary' type='submit'>
           Guardar productor
         </button>
       </form>
+      <SuccessModal show={showModal} onClose={() => setShowModal(false)} message="PRODUCTOR agregada correctamente." />
     </div>
   );
 }
