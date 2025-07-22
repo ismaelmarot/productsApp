@@ -17,10 +17,10 @@ export const producerItems: { label: string; view: View }[] = [
 ];
 
 export const categoryItems: { label: string; view: View }[] = [
-  // { label: 'Ver Categoría', view: 'detailsCategory' },
+  { label: 'Ver Categoría', view: 'detailsCategory' },
   { label: 'Agregar Categoría', view: 'addCategory' },
-  // { label: 'Editar Categoría', view: 'editCategory' },
-  // { label: 'Ver listado Categorías', view: 'listCategories' },
-  // { label: 'Eliminar Categoría', view: 'deleteCategory' },
-  // { label: 'Ver Categoría', view: 'detailsCategory' },
+  { label: 'Editar Categoría', view: 'editCategory' },
+  { label: 'Ver listado Categorías', view: 'listCategories' },
+  { label: 'Eliminar Categoría', view: 'deleteCategory' },
+  { label: 'Ver Categoría', view: 'detailsCategory' },
 ];
