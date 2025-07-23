@@ -14,7 +14,6 @@ function MainView({
   setSelectedCategory,
 }: MainViewProps) {
   const handleDone = () => setView('products');
-  console.log('Current view:', view);
 
   if (view.startsWith('add') || view.startsWith('edit') || view.startsWith('details') || view.startsWith('list') || view.startsWith('delete')) {
     if (view.includes('Product')) {
