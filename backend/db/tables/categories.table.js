@@ -4,7 +4,8 @@ function createCategoriesTable(db) {
   db.run(`
     CREATE TABLE IF NOT EXISTS categories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL UNIQUE
+      name TEXT NOT NULL UNIQUE,
+      note TEXT
     )
   `, (err) => {
     if (err) {

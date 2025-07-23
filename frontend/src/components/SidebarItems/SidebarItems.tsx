@@ -22,4 +22,4 @@ export const categoryItems: { label: string; view: View }[] = [
   { label: 'Editar Categoría', view: 'editCategory' },
   { label: 'Ver listado Categorías', view: 'listCategories' },
   { label: 'Eliminar Categoría', view: 'deleteCategory' },
-];
+]; 

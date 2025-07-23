@@ -22,13 +22,12 @@ const AddCategory = ({ onCategoryAdded }: AddCategoryProps) => {
     e.preventDefault();
     setShowModal(true);
 
-    if (!id.trim() || !name.trim()) {
-      alert("ID y Nombre son obligatorios");
+    if (!name.trim()) {
+      alert("El nombre de Categoría es obligatorio");
       return;
     }
 
     const newCategory = {
-      id: id.trim(),
       name: name.trim(),
       note: note.trim() || null,
     };
@@ -63,18 +62,6 @@ const AddCategory = ({ onCategoryAdded }: AddCategoryProps) => {
     <>
       <form onSubmit={handleSubmit} className='mb-4'>
         <h2>Agregar nueva categoría</h2>
-
-        <div className='mb-3'>
-          <label className='form-label'>ID:</label>
-          <input
-            type='text'
-            className='form-control'
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-            required
-          />
-        </div>
-
         <div className='mb-3'>
           <label className='form-label'>Nombre:</label>
           <input

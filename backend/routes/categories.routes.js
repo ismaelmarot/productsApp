@@ -30,8 +30,8 @@ router.get('/:id', (req, res) => {
 
 // C R E A T E
 router.post('/', (req, res) => {
-  const { name } = req.body;
-  db.run('INSERT INTO categories (name) VALUES (?)', [name], function (err) {
+  const { name, note } = req.body;
+  db.run('INSERT INTO categories (name, note) VALUES (?, ?)', [name, note], function (err) {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
@@ -43,14 +43,18 @@ router.post('/', (req, res) => {
 // E D I T
 router.put('/:id', (req, res) => {
   const { id } = req.params;
-  const { name } = req.body;
-  db.run('UPDATE categories SET name = ? WHERE id = ?', [name, id], function (err) {
-    if (err) {
-      res.status(500).json({ error: err.message });
-    } else {
-      res.json({ id, name });
+  const { name, note } = req.body;
+  db.run(
+    'UPDATE categories SET name = ?, note = ? WHERE id = ?',
+    [name, note, id],
+    function (err) {
+      if (err) {
+        res.status(500).json({ error: err.message });
+      } else {
+        res.json({ id, name, note });
+      }
     }
-  });
+  );
 });
 
 // D E L E T E
