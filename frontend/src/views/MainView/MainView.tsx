@@ -1,7 +1,7 @@
 import type { MainViewProps } from '../../interfaces/MainView.interface';
-import ProducerViews from '../ProducerView/ProducerView';
-import ProductViews from '../ProductView/ProductView';
-import CategoryViews from '../CategoryView/CategoryView';
+import ProducerViews from '../ProducerViews/ProducerViews';
+import ProductViews from '../ProductViews/ProductViews';
+import CategoryViews from '../CategoryViews/CategoryViews';
 
 function MainView({
   view,
@@ -14,6 +14,7 @@ function MainView({
   setSelectedCategory,
 }: MainViewProps) {
   const handleDone = () => setView('products');
+  console.log('Current view:', view);
 
   if (view.startsWith('add') || view.startsWith('edit') || view.startsWith('details') || view.startsWith('list') || view.startsWith('delete')) {
     if (view.includes('Product')) {
@@ -41,6 +42,7 @@ function MainView({
     }
 
     if (view.includes('Category')) {
+       console.log('Current view:', view);
       return (
         <CategoryViews
           view={view}

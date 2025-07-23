@@ -2,7 +2,7 @@ import type { CategoryViewProps } from '../../interfaces/CategoryView.interface'
 import AddCategory from '../../components/Categories/AddCategory/AddCategory';
 import DetailsCategory from '../../components/Categories/DetailsCategory/DetailsCategory';
 import EditCategory from '../../components/Categories/EditCategory/EditCategory';
-import ListCategories from '../../components/Categories/ListCategories/ListCategory';
+import ListCategories from '../../components/Categories/ListCategories/ListCategories';
 import DeleteCategory from '../../components/Categories/DeleteCategory/DeleteCategory';
 
 function CategoryViews({ view, setView, selectedCategory, setSelectedCategory, onDone }: CategoryViewProps) {
@@ -13,19 +13,8 @@ function CategoryViews({ view, setView, selectedCategory, setSelectedCategory, o
       return <DetailsCategory />;
     case 'editCategory':
       return <EditCategory onUpdated={onDone} />;
-    case 'listCategories':
-      return (
-        <ListCategories
-          onViewCategory={(category) => {
-            setSelectedCategory(category);
-            setView('detailsCategory');
-          }}
-          onEditCategory={(category) => {
-            setSelectedCategory(category);
-            setView('editCategory');
-          }}
-        />
-      );
+    case 'listCategory':
+      return <ListCategories />;
     case 'deleteCategory':
       return (
         <DeleteCategory

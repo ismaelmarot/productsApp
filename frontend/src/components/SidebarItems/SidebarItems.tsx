@@ -20,6 +20,6 @@ export const categoryItems: { label: string; view: View }[] = [
   { label: 'Ver Categoría', view: 'detailsCategory' },
   { label: 'Agregar Categoría', view: 'addCategory' },
   { label: 'Editar Categoría', view: 'editCategory' },
-  { label: 'Ver listado Categorías', view: 'listCategories' },
+  { label: 'Ver listado Categorías', view: 'listCategory' },
   { label: 'Eliminar Categoría', view: 'deleteCategory' },
 ];

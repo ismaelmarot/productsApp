@@ -1,14 +1,10 @@
-export interface Category {
-  id: number;
-  name: string;
-  note: string;
-}
+import type { Category } from '../interfaces/Category.interface';
 
 const API_URL = 'http://localhost:3001/api/categories';
 
 export async function getCategories(): Promise<Category[]> {
   const res = await fetch(API_URL);
-  if (!res.ok) throw new Error('Error fetching categories');
+  if (!res.ok) throw new Error("Error fetching categories");
   return res.json();
 }
 
@@ -18,7 +14,7 @@ export async function addCategory(name: string, note: string): Promise<Category>
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ name, note }),
   });
-  if (!res.ok) throw new Error('Error adding category');
+  if (!res.ok) throw new Error("Error adding category");
   return res.json();
 }
 
@@ -36,5 +32,5 @@ export async function deleteCategory(id: number): Promise<void> {
   const res = await fetch(`${API_URL}/${id}`, {
     method: 'DELETE',
   });
-  if (!res.ok) throw new Error('Error deleting category');
+  if (!res.ok) throw new Error("Error deleting category");
 }

@@ -13,5 +13,5 @@ export type View =
   | 'addCategory'
   | 'detailsCategory'
   | 'editCategory'
-  | 'listCategories'
+  | 'listCategory'
   | 'deleteCategory';
