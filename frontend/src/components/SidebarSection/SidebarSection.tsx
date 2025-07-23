@@ -18,7 +18,7 @@ function SidebarSection({ title, items, onChangeView }: SidebarSectionProps) {
 
       <div
         id={`collapse-${title}`}
-        className='accordion-collapse collapse show'
+        className='accordion-collapse collapse not-show'
         data-bs-parent='#accordionExample'
       >
         {items.map((item) => (
