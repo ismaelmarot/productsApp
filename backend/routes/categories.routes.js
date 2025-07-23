@@ -3,6 +3,7 @@ const router = express.Router();
 const db = require('../db/database');
 
 // G E T
+// List all categories
 router.get('/', (req, res) => {
   db.all('SELECT * FROM categories', [], (err, rows) => {
     if (err) {
@@ -12,6 +13,20 @@ router.get('/', (req, res) => {
     }
   });
 });
+// Get by ID
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  db.get('SELECT * FROM categories WHERE id = ?', [id], (err, row) => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+    } else if (!row) {
+      res.status(404).json({ error: 'Category not found' });
+    } else {
+      res.json(row);
+    }
+  });
+});
+
 
 // C R E A T E
 router.post('/', (req, res) => {
