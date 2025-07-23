@@ -1,6 +1,7 @@
 export interface Category {
   id: number;
   name: string;
+  note: string;
 }
 
 const API_URL = 'http://localhost:3001/api/categories';
@@ -11,21 +12,21 @@ export async function getCategories(): Promise<Category[]> {
   return res.json();
 }
 
-export async function addCategory(name: string): Promise<Category> {
+export async function addCategory(name: string, note: string): Promise<Category> {
   const res = await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name }),
+    body: JSON.stringify({ name, note }),
   });
   if (!res.ok) throw new Error('Error adding category');
   return res.json();
 }
 
-export async function updateCategory(id: number, name: string): Promise<Category> {
+export async function updateCategory(id: number, name: string, note: string): Promise<Category> {
   const res = await fetch(`${API_URL}/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name }),
+    body: JSON.stringify({ name, note }),
   });
   if (!res.ok) throw new Error('Error updating category');
   return res.json();

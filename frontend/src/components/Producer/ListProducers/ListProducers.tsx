@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import type { Producer } from '../../../interfaces/Producer.interface';
+import type { ListProducersProps } from '../../../interfaces/ListProducers.interface';
 
-interface Props {
-  onViewProducer: (producer: Producer) => void;
-  onEditProducer: (producer: Producer) => void;
-}
-
-function ListProducers({ onViewProducer, onEditProducer }: Props) {
+function ListProducers({ onViewProducer, onEditProducer }: ListProducersProps) {
   const [producers, setProducers] = useState<Producer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
