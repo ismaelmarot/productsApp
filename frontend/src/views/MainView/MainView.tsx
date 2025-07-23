@@ -41,7 +41,6 @@ function MainView({
     }
 
     if (view.includes('Category')) {
-       console.log('Current view:', view);
       return (
         <CategoryViews
           view={view}
