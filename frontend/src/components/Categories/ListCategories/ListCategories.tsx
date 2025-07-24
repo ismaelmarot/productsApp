@@ -28,7 +28,7 @@ function ListCategories({ onViewCategory, onEditCategory }: ListCategoriesProps)
   if (categories.length === 0) return <p>No hay Categorías disponibles.</p>;
 
   return (
-    <div className='container'>
+    <>
       <h2>Listado de Categorías</h2>
       <table className='table table-striped'>
         <thead>
@@ -60,7 +60,7 @@ function ListCategories({ onViewCategory, onEditCategory }: ListCategoriesProps)
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 }
 

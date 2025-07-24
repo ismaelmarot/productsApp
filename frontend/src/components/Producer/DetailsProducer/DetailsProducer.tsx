@@ -35,7 +35,7 @@ function DetailsProducer() {
   }
 
   return (
-    <div className='container mt-3'>
+    <>
       <h2>Buscar detalles de un productor</h2>
 
       <div className='mb-3'>
@@ -74,7 +74,7 @@ function DetailsProducer() {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
 

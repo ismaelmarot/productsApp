@@ -48,7 +48,7 @@ function AddProducer({ onProducerAdded }: AddProducerProps) {
   };
 
   return (
-    <div className='container'>
+    <>
       <h2>Agregar productor</h2>
       {error && <p className='text-danger'>{error}</p>}
       {success && <p className='text-success'>Productor creado correctamente.</p>}
@@ -59,7 +59,7 @@ function AddProducer({ onProducerAdded }: AddProducerProps) {
         </button>
       </form>
       <SuccessModal show={showModal} onClose={() => setShowModal(false)} message="PRODUCTOR agregada correctamente." />
-    </div>
+    </>
   );
 }
 

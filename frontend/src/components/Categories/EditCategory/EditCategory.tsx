@@ -62,7 +62,7 @@ function EditCategory({ onUpdated }: EditCategoryProps) {
   };
 
   return (
-    <div className='container'>
+    <>
       <h2>Editar Categoría</h2>
 
       {/* Ingreso de ID */}
@@ -128,7 +128,7 @@ function EditCategory({ onUpdated }: EditCategoryProps) {
           </div>
         </form>
       )}
-    </div>
+    </>
   );
 }
 

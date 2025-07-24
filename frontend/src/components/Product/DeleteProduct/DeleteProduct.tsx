@@ -61,13 +61,15 @@ function DeleteProduct({ onProductDeleted }: DeleteProductProps) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className='mb-4'>
-        <h2>Eliminar producto existente por ID</h2>
-        {renderSetData('ID', 'text', code, (e) => setCode(toUppercaseHelper(e.target.value)))}
-        <button type='submit' className='btn btn-danger'>
-            Eliminar
-        </button>
-        </form>
+        <>
+            <form onSubmit={handleSubmit}>
+            <h2>Eliminar producto existente por ID</h2>
+            {renderSetData('ID', 'text', code, (e) => setCode(toUppercaseHelper(e.target.value)))}
+            <button type='submit' className='btn btn-danger'>
+                Eliminar
+            </button>
+            </form>
+        </>
     );
 }
 

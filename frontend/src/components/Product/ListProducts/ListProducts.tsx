@@ -35,7 +35,7 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
   if (products.length === 0) return <p>No hay productos disponibles.</p>;
 
   return (
-    <div className='container'>
+    <>
       <h2>Listado de productos</h2>
       <SortBar
         sortBy={sortBy}
@@ -79,7 +79,7 @@ function ListProducts({ onViewProduct, onEditProduct }: ListProductsProps) {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 }
 

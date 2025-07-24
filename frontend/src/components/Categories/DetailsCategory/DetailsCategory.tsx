@@ -35,7 +35,7 @@ function DetailsCategory() {
   }
 
   return (
-    <div className='container mt-3'>
+    <>
       <h2>Buscar detalles de la Categoría</h2>
 
       <div className='mb-3'>
@@ -65,7 +65,7 @@ function DetailsCategory() {
           </div>
         </div>
       )}
-    </div>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import type { Product } from '../../../interfaces/Product.interface';
+import type { Product } from '../../../interfaces/product.interface/Product.interface';
 import { toInputDate } from '../../../helpers/dateHelper';
-import type { EditProductProps } from '../../../interfaces/EditProduct.interface';
+import type { EditProductProps } from '../../../interfaces/product.interface/EditProduct.interface';
 import { getProductByCode, patchProduct } from '../../../api/products.api';
 import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
 
@@ -33,7 +33,7 @@ function EditProduct({ onUpdated }: EditProductProps) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setForm(prev => ({
+    setForm((prev: any) => ({
       ...prev,
       [name]: name === 'price' || name.includes('price') ? Number(value) : value,
     }));
@@ -57,7 +57,7 @@ function EditProduct({ onUpdated }: EditProductProps) {
   };
 
   return (
-    <div className='container'>
+    <div>
       <h2>Editar Producto</h2>
 
       {!productData && (

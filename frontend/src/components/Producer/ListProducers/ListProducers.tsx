@@ -29,7 +29,7 @@ function ListProducers({ onViewProducer, onEditProducer }: ListProducersProps) {
   if (producers.length === 0) return <p>No hay productores disponibles.</p>;
 
   return (
-    <div className='container'>
+    <>
       <h2>Listado de Productores</h2>
       <table className='table table-striped'>
         <thead>
@@ -68,7 +68,7 @@ function ListProducers({ onViewProducer, onEditProducer }: ListProducersProps) {
           ))}
         </tbody>
       </table>
-    </div>
+    </>
   );
 }
 

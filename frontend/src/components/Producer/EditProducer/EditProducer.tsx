@@ -65,7 +65,7 @@ function EditProducer({ onUpdated }: EditProducerProps) {
   };
 
   return (
-    <div className='container'>
+    <>
       <h2>Editar Productor</h2>
 
       {/* Ingreso de ID */}
@@ -188,7 +188,7 @@ function EditProducer({ onUpdated }: EditProducerProps) {
           </div>
         </form>
       )}
-    </div>
+    </>
   );
 }
 
