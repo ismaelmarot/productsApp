@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { createCategory, updateCategory } from '../../../api/categories.api';
 
-
 interface Props {
   onSuccess: () => void;
   categoryToEdit: { id: number; name: string } | null;
@@ -30,9 +29,9 @@ const CategoryForm: React.FC<Props> = ({ onSuccess, categoryToEdit, onCancel }) 
   return (
     <form onSubmit={handleSubmit}>
       <input
-        type="text"
+        type='text'
         value={name}
-        placeholder="Nombre de categoría"
+        placeholder='Nombre de categoría'
         onChange={(e) => setName(e.target.value)}
       />
       <button type="submit">{categoryToEdit ? 'Actualizar' : 'Agregar'}</button>
