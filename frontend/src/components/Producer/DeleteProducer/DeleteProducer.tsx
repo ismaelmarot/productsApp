@@ -1,44 +1,33 @@
 import { useState } from 'react';
-interface Props {
-  onProducerDeleted: (deletedName: string) => void;
-}
+import type { DeleteProducerProps } from '../../../interfaces/producer.interface/DeleteProducer.interface';
 
-function DeleteProducer({ onProducerDeleted }: Props) {
-  const [fullName, setFullName] = useState('');
+function DeleteProducer({ onProducerDeleted }: DeleteProducerProps) {
+  const [producerId, setProducerId] = useState<number | ''>('');
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    const trimmedName = fullName.trim();
-    if (!trimmedName) {
-      setError("Nombre completo inválido");
+    const id = Number(producerId);
+    if (!id || isNaN(id)) {
+      setError('ID inválido');
       return;
     }
 
-    if (!window.confirm(`¿Eliminar productor "${trimmedName}"?`)) return;
+    if (!window.confirm(`¿Eliminar productor con ID ${id}?`)) return;
 
     try {
-      const resGet = await fetch(`http://localhost:3001/api/producers/name/${encodeURIComponent(trimmedName)}`);
-      if (!resGet.ok) {
-        const errData = await resGet.json();
-        alert("Error al buscar el productor: " + errData.error);
-        return;
-      }
-
-      const producer = await resGet.json();
-
-      const resDelete = await fetch(`http://localhost:3001/api/producers/${producer.id}`, {
+      const resDelete = await fetch(`http://localhost:3001/api/producers/${id}`, {
         method: 'DELETE',
       });
 
       if (resDelete.ok) {
-        onProducerDeleted(trimmedName);
-        setFullName('');
+        onProducerDeleted(id);
+        setProducerId('');
       } else {
         const data = await resDelete.json();
-        alert("Error eliminando: " + data.error);
+        alert('Error eliminando: ' + data.error);
       }
     } catch (err) {
       console.error("Error eliminando productor:", err);
@@ -48,15 +37,15 @@ function DeleteProducer({ onProducerDeleted }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className='mb-4'>
-      <h2>Eliminar productor existente por nombre completo</h2>
+      <h2>Eliminar productor existente por ID</h2>
 
       <div className='mb-3'>
-        <label className='form-label'>Nombre completo:</label>
+        <label className='form-label'>ID del productor:</label>
         <input
-          type='text'
+          type='number'
           className='form-control'
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
+          value={producerId}
+          onChange={(e) => setProducerId(Number(e.target.value))}
           required
         />
       </div>
