@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import type { Category } from '../../../interfaces/Category.interface';
+import type { ListCategoriesProps } from '../../../interfaces/ListCategories.interface';
 import { getCategories } from '../../../api/categories.api';
 
-function ListCategories() {
+function ListCategories({ onViewCategory, onEditCategory }: ListCategoriesProps) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -41,6 +42,20 @@ function ListCategories() {
             <tr key={cat.id}>
               <td>{cat.name}</td>
               <td>{cat.note || '-'}</td>
+              <td>
+                <button
+                  className='btn btn-sm btn-primary me-2'
+                  onClick={() => onViewCategory(cat)}
+                >
+                  Ver
+                </button>
+                <button
+                  className='btn btn-sm btn-warning'
+                  onClick={() => onEditCategory(cat)}
+                >
+                  Editar
+                </button>
+              </td>
             </tr>
           ))}
         </tbody>
