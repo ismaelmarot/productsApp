@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { Product } from '../../../interfaces/Product.interface';
-import type { ListProductsProps } from '../../../interfaces/ListProducts.interface';
+import type { Product } from '../../../interfaces/product.interface/Product.interface';
+import type { ListProductsProps } from '../../../interfaces/product.interface/ListProducts.interface';
 import SortBar from '../../SortBar/SortBar';
 import useSortedProducts from '../../../hooks/useSortedProducts';
 import { getProducts } from '../../../api/products.api';
