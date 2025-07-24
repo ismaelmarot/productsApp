@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { Category } from '../../../interfaces/Category.interface';
-import type { ListCategoriesProps } from '../../../interfaces/ListCategories.interface';
+import type { Category } from '../../../interfaces/category.interface/Category.interface';
+import type { ListCategoriesProps } from '../../../interfaces/category.interface/ListCategories.interface';
 import { getCategories } from '../../../api/categories.api';
 
 function ListCategories({ onViewCategory, onEditCategory }: ListCategoriesProps) {

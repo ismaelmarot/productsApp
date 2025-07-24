@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { initialProducerData } from '../../../constants/initialProducerData';
-import type { Producer } from '../../../interfaces/Producer.interface';
+import type { Producer } from '../../../interfaces/producer.interface/Producer.interface';
 import { useSuccessModal } from '../../../hooks/useSuccessModal';
 import ProducerFormFields from '../ProducerForm/ProducerFormFields/ProducerFormFields';
 import SuccessModal from '../../SuccessModal/SuccessModal';
-import type { AddProducerProps } from '../../../interfaces/AddProducer.interface';
+import type { AddProducerProps } from '../../../interfaces/producer.interface/AddProducer.interface';
 
 function AddProducer({ onProducerAdded }: AddProducerProps) {
   const [formData, setFormData] = useState<Producer>(initialProducerData);

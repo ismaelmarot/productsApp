@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import type { Producer } from '../../../interfaces/Producer.interface';
-import type { ListProducersProps } from '../../../interfaces/ListProducers.interface';
+import type { Producer } from '../../../interfaces/producer.interface/Producer.interface';
+import type { ListProducersProps } from '../../../interfaces/producer.interface/ListProducers.interface';
 
 function ListProducers({ onViewProducer, onEditProducer }: ListProducersProps) {
   const [producers, setProducers] = useState<Producer[]>([]);

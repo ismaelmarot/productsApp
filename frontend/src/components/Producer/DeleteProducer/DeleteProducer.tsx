@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 interface Props {
   onProducerDeleted: (deletedName: string) => void;
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Modal } from 'bootstrap';
-import type { AddCategoryProps } from '../../../interfaces/AddCategory.interface';
+import type { AddCategoryProps } from '../../../interfaces/category.interface/AddCategory.interface';
 import SuccessModal from '../../SuccessModal/SuccessModal';
 
 const AddCategory = ({ onCategoryAdded }: AddCategoryProps) => {

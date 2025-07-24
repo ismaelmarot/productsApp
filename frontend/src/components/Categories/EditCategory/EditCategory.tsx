@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { Category } from '../../../interfaces/Category.interface';
-import type { EditCategoryProps } from '../../../interfaces/EditCategory.interface';
+import type { Category } from '../../../interfaces/category.interface/Category.interface';
+import type { EditCategoryProps } from '../../../interfaces/category.interface/EditCategory.interface';
 
 function EditCategory({ onUpdated }: EditCategoryProps) {
   const [categoryId, setCategoryId] = useState('');
@@ -22,11 +22,11 @@ function EditCategory({ onUpdated }: EditCategoryProps) {
 
     try {
       const res = await fetch(`http://localhost:3001/api/categories/${categoryId}`);
-      if (!res.ok) throw new Error('Categoría no encontrado');
+      if (!res.ok) throw new Error("Categoría no encontrado");
       const data = await res.json();
       setCategoryData(data);
     } catch (err: any) {
-      setError(err.message || 'Error al cargar la Categoría');
+      setError(err.message || "Error al cargar la Categoría");
       setCategoryData(null);
     } finally {
       setLoading(false);

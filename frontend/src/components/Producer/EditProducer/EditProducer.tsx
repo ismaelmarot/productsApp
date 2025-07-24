@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { Producer } from '../../../interfaces/Producer.interface';
-import type { EditProducerProps } from '../../../interfaces/EditProducer.interface';
+import type { Producer } from '../../../interfaces/producer.interface/Producer.interface';
+import type { EditProducerProps } from '../../../interfaces/producer.interface/EditProducer.interface';
 
 function EditProducer({ onUpdated }: EditProducerProps) {
   const [producerId, setProducerId] = useState('');

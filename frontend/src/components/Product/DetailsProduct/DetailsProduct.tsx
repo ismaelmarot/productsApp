@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Product } from '../../../interfaces/Product.interface';
+import type { Product } from '../../../interfaces/product.interface/Product.interface';
 import FormatPrice from '../../FormattedPriceInput/FormatPrice';
 import FormatDate from '../../FormatDate/FormatDate';
 import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
@@ -43,7 +43,7 @@ function DetailsProduct() {
     };
 
     return (
-        <div className='container mt-3'>
+        <>
             <h2>Buscar detalles de un producto</h2>
 
             <div className='mb-3'>
@@ -85,7 +85,7 @@ function DetailsProduct() {
                     </div>
                 </div>
             )}
-        </div>
+        </>
     )
 }
 

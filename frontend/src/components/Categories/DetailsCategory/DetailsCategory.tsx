@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Category } from '../../../interfaces/Category.interface'
+import type { Category } from '../../../interfaces/category.interface/Category.interface'
 
 function DetailsCategory() {
   const [categoryId, setCategoryId] = useState('')

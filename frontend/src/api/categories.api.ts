@@ -1,4 +1,4 @@
-import type { Category } from '../interfaces/Category.interface';
+import type { Category } from '../interfaces/category.interface/Category.interface';
 
 const API_URL = 'http://localhost:3001/api/categories';
 

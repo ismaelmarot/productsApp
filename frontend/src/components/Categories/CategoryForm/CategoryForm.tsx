@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { createCategory, updateCategory } from '../../../api/api';
+import { createCategory, updateCategory } from '../../../api/categories.api';
+
 
 interface Props {
   onSuccess: () => void;

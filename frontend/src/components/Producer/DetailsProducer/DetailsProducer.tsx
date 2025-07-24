@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Producer } from '../../../interfaces/Producer.interface'
+import type { Producer } from '../../../interfaces/producer.interface/Producer.interface'
 
 function DetailsProducer() {
   const [producerId, setProducerId] = useState('')

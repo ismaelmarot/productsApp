@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { DeleteProductProps } from '../../../interfaces/DeleteProduct.interface';
+import type { DeleteProductProps } from '../../../interfaces/product.interface/DeleteProduct.interface';
 import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
 
 const renderSetData = (
