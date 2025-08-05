@@ -12,7 +12,7 @@ function SidebarSection({ title, items, onChangeView }: SidebarSectionProps) {
           aria-expanded='true'
           aria-controls={`collapse-${title}`}
         >
-          <strong>{title}</strong>
+          <strong style={{paddingRight:'.5rem'}}>{title}</strong>
         </button>
       </h2>
 
