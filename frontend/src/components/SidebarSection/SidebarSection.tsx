@@ -1,4 +1,4 @@
-import type { SidebarSectionProps } from '../../interfaces/SidebarSection.interface';
+import type { SidebarSectionProps } from '../../interfaces/SidebarSection.interface'
 
 function SidebarSection({ title, items, onChangeView }: SidebarSectionProps) {
   return (
@@ -38,7 +38,7 @@ function SidebarSection({ title, items, onChangeView }: SidebarSectionProps) {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default SidebarSection;
+export default SidebarSection
