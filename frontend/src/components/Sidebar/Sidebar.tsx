@@ -1,6 +1,6 @@
-import SidebarSection from '../SidebarSection/SidebarSection';
-import { producerItems, productItems, categoryItems } from '../SidebarItems/SidebarItems';
-import type { SidebarProps } from '../../interfaces/Sidebar.interface';
+import SidebarSection from '../SidebarSection/SidebarSection'
+import { producerItems, productItems, categoryItems } from '../SidebarItems/SidebarItems'
+import type { SidebarProps } from '../../interfaces/Sidebar.interface'
 
 function Sidebar({ onChangeView }: SidebarProps) {
   return (
@@ -9,7 +9,7 @@ function Sidebar({ onChangeView }: SidebarProps) {
       <SidebarSection title='Productores' items={producerItems} onChangeView={onChangeView} />
       <SidebarSection title='Categorías' items={categoryItems} onChangeView={onChangeView} />
     </div>
-  );
+  )
 }
 
-export default Sidebar;
+export default Sidebar
