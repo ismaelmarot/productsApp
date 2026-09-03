@@ -1,30 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { createCategory, updateCategory } from '../../../api/categories.api';
+import React, { useEffect, useState } from 'react'
+import { createCategory, updateCategory } from '../../../api/categories.api'
 
 interface Props {
-  onSuccess: () => void;
-  categoryToEdit: { id: number; name: string } | null;
-  onCancel: () => void;
+  onSuccess: () => void
+  categoryToEdit: { id: number; name: string } | null
+  onCancel: () => void
 }
 
 const CategoryForm: React.FC<Props> = ({ onSuccess, categoryToEdit, onCancel }) => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState('')
 
   useEffect(() => {
-    if (categoryToEdit) setName(categoryToEdit.name);
-    else setName('');
-  }, [categoryToEdit]);
+    if (categoryToEdit) setName(categoryToEdit.name)
+    else setName('')
+  }, [categoryToEdit])
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     if (categoryToEdit) {
-      await updateCategory(categoryToEdit.id, { name });
+      await updateCategory(categoryToEdit.id, { name })
     } else {
-      await createCategory({ name });
+      await createCategory({ name })
     }
-    onSuccess();
-    onCancel();
-  };
+    onSuccess()
+    onCancel()
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -37,7 +37,7 @@ const CategoryForm: React.FC<Props> = ({ onSuccess, categoryToEdit, onCancel }) 
       <button type="submit">{categoryToEdit ? 'Actualizar' : 'Agregar'}</button>
       {categoryToEdit && <button onClick={onCancel}>Cancelar</button>}
     </form>
-  );
-};
+  )
+}
 
-export default CategoryForm;
+export default CategoryForm
