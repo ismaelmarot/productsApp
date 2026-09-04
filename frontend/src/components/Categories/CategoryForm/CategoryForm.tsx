@@ -2,12 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { createCategory, updateCategory } from '../../../api/categories.api'
 import type { CategoryFormProps } from '../../../interfaces/CaregoryForm.interface'
 
-// interface Props {
-//   onSuccess: () => void
-//   categoryToEdit: { id: number; name: string } | null
-//   onCancel: () => void
-// }
-
 const CategoryForm: React.FC<CategoryFormProps> = ({ onSuccess, categoryToEdit, onCancel }) => {
   const [name, setName] = useState('')
 

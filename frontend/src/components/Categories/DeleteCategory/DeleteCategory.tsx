@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import type { DeleteCategoryProps } from '../../../interfaces/category.interface/DeleteCategory.interface';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
+import { useState } from 'react'
+import type { DeleteCategoryProps } from '../../../interfaces/category.interface/DeleteCategory.interface'
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper'
 
 const renderSetData = (
     label: string,
@@ -18,49 +18,49 @@ const renderSetData = (
             required
         />
     </div>
-);
+)
 
 function DeleteCategory({ onCategoryDeleted }: DeleteCategoryProps) {
-    const [id, setId] = useState('');
+    const [id, setId] = useState('')
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault()
 
         if (!id.trim()) {
-            alert("ID inválido");
-            return;
+            alert("ID inválido")
+            return
         }
 
-        if (!window.confirm(`¿Eliminar Categoría con ID "${id}"?`)) return;
+        if (!window.confirm(`¿Eliminar Categoría con ID "${id}"?`)) return
 
         try {
             // GET de la categoría por ID
-            const resGet = await fetch(`http://localhost:3001/api/categories/${id}`);
+            const resGet = await fetch(`http://localhost:3001/api/categories/${id}`)
             if (!resGet.ok) {
-                const errData = await resGet.json();
-                alert("Error al buscar la categoría: " + errData.error);
-                return;
+                const errData = await resGet.json()
+                alert("Error al buscar la categoría: " + errData.error)
+                return
             }
 
-            const category = await resGet.json();
+            const category = await resGet.json()
 
             // DELETE de la categoría
             const resDelete = await fetch(`http://localhost:3001/api/categories/${category.id}`, {
                 method: 'DELETE'
-            });
+            })
 
             if (resDelete.ok) {
                 onCategoryDeleted(id); // callback para actualizar lista
-                setId('');
+                setId('')
             } else {
-                const data = await resDelete.json();
-                alert("Error eliminando: " + data.error);
+                const data = await resDelete.json()
+                alert("Error eliminando: " + data.error)
             }
         } catch (err) {
-            console.error("Error eliminando Categoría:", err);
-            alert("Error de conexión al eliminar la Categoría");
+            console.error("Error eliminando Categoría:", err)
+            alert("Error de conexión al eliminar la Categoría")
         }
-    };
+    }
 
     return (
         <form onSubmit={handleSubmit} className='mb-4'>
@@ -70,7 +70,7 @@ function DeleteCategory({ onCategoryDeleted }: DeleteCategoryProps) {
                 Eliminar
             </button>
         </form>
-    );
+    )
 }
 
-export default DeleteCategory;
+export default DeleteCategory
