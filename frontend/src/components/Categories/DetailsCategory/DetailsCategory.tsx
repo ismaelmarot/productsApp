@@ -69,5 +69,4 @@ function DetailsCategory() {
   )
 }
 
-export default DetailsCategory;
-
+export default DetailsCategory
