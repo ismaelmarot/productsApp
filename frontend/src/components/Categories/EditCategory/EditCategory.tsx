@@ -1,65 +1,65 @@
-import { useState, useEffect } from 'react';
-import type { Category } from '../../../interfaces/category.interface/Category.interface';
-import type { EditCategoryProps } from '../../../interfaces/category.interface/EditCategory.interface';
+import { useState, useEffect } from 'react'
+import type { Category } from '../../../interfaces/category.interface/Category.interface'
+import type { EditCategoryProps } from '../../../interfaces/category.interface/EditCategory.interface'
 
 function EditCategory({ onUpdated }: EditCategoryProps) {
-  const [categoryId, setCategoryId] = useState('');
-  const [categoryData, setCategoryData] = useState<Category | null>(null);
-  const [form, setForm] = useState<Partial<Category>>({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [categoryId, setCategoryId] = useState('')
+  const [categoryData, setCategoryData] = useState<Category | null>(null)
+  const [form, setForm] = useState<Partial<Category>>({})
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (categoryData) setForm(categoryData);
-  }, [categoryData]);
+    if (categoryData) setForm(categoryData)
+  }, [categoryData])
 
   useEffect(() => {
-  }, [form.name, form.note]);
+  }, [form.name, form.note])
 
   const fetchCategory = async () => {
-    setLoading(true);
-    setError(null);
+    setLoading(true)
+    setError(null)
 
     try {
-      const res = await fetch(`http://localhost:3001/api/categories/${categoryId}`);
-      if (!res.ok) throw new Error("Categoría no encontrado");
-      const data = await res.json();
-      setCategoryData(data);
+      const res = await fetch(`http://localhost:3001/api/categories/${categoryId}`)
+      if (!res.ok) throw new Error("Categoría no encontrado")
+      const data = await res.json()
+      setCategoryData(data)
     } catch (err: any) {
-      setError(err.message || "Error al cargar la Categoría");
-      setCategoryData(null);
+      setError(err.message || "Error al cargar la Categoría")
+      setCategoryData(null)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setForm(prev => ({
       ...prev,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!categoryData) return;
+    e.preventDefault()
+    if (!categoryData) return
 
     try {
       const res = await fetch(`http://localhost:3001/api/categories/${categoryData.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
-      });
+      })
 
-      if (!res.ok) throw new Error("Error al actualizar Categoría");
+      if (!res.ok) throw new Error("Error al actualizar Categoría")
 
-      alert("Categoría actualizada correctamente");
-      onUpdated();
+      alert("Categoría actualizada correctamente")
+      onUpdated()
     } catch (err) {
-      alert("Error al actualizar la Catgoría");
+      alert("Error al actualizar la Catgoría")
     }
-  };
+  }
 
   return (
     <>
@@ -129,7 +129,7 @@ function EditCategory({ onUpdated }: EditCategoryProps) {
         </form>
       )}
     </>
-  );
+  )
 }
 
-export default EditCategory;
+export default EditCategory
