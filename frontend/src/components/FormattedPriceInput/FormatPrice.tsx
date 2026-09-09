@@ -7,7 +7,7 @@ function FormatPrice({ value, currency = 'ARS' }: FormatPriceProps) {
   const number =
     typeof value === 'string'
       ? parseFloat(value.replace(/\./g, '').replace(',', '.'))
-      : value;
+      : value
 
   if (isNaN(number)) return <span>-</span>;
 
@@ -16,9 +16,9 @@ function FormatPrice({ value, currency = 'ARS' }: FormatPriceProps) {
     currency,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(number);
+  }).format(number)
 
-  return <span>{formatted}</span>;
+  return <span>{formatted}</span>
 }
 
-export default FormatPrice;
+export default FormatPrice
