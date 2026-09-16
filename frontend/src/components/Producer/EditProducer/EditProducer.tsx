@@ -1,68 +1,68 @@
-import { useState, useEffect } from 'react';
-import type { Producer } from '../../../interfaces/producer.interface/Producer.interface';
-import type { EditProducerProps } from '../../../interfaces/producer.interface/EditProducer.interface';
+import { useState, useEffect } from 'react'
+import type { Producer } from '../../../interfaces/producer.interface/Producer.interface'
+import type { EditProducerProps } from '../../../interfaces/producer.interface/EditProducer.interface'
 
 function EditProducer({ onUpdated }: EditProducerProps) {
-  const [producerId, setProducerId] = useState('');
-  const [producerData, setProducerData] = useState<Producer | null>(null);
-  const [form, setForm] = useState<Partial<Producer>>({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [producerId, setProducerId] = useState('')
+  const [producerData, setProducerData] = useState<Producer | null>(null)
+  const [form, setForm] = useState<Partial<Producer>>({})
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (producerData) setForm(producerData);
-  }, [producerData]);
+    if (producerData) setForm(producerData)
+  }, [producerData])
 
   useEffect(() => {
-    const { first_name = '', last_name = '', nickname = '' } = form;
-    const fullNameValue = [first_name, nickname, last_name].filter(Boolean).join(' ').trim();
-    setForm(prev => ({ ...prev, full_name: fullNameValue }));
-  }, [form.first_name, form.last_name, form.nickname]);
+    const { first_name = '', last_name = '', nickname = '' } = form
+    const fullNameValue = [first_name, nickname, last_name].filter(Boolean).join(' ').trim()
+    setForm(prev => ({ ...prev, full_name: fullNameValue }))
+  }, [form.first_name, form.last_name, form.nickname])
 
   const fetchProducer = async () => {
-    setLoading(true);
-    setError(null);
+    setLoading(true)
+    setError(null)
 
     try {
-      const res = await fetch(`http://localhost:3001/api/producers/${producerId}`);
-      if (!res.ok) throw new Error('Productor no encontrado');
-      const data = await res.json();
-      setProducerData(data);
+      const res = await fetch(`http://localhost:3001/api/producers/${producerId}`)
+      if (!res.ok) throw new Error('Productor no encontrado')
+      const data = await res.json()
+      setProducerData(data)
     } catch (err: any) {
-      setError(err.message || 'Error al cargar productor');
-      setProducerData(null);
+      setError(err.message || 'Error al cargar productor')
+      setProducerData(null)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target
     setForm(prev => ({
       ...prev,
       [name]: value,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!producerData) return;
+    e.preventDefault()
+    if (!producerData) return
 
     try {
       const res = await fetch(`http://localhost:3001/api/producers/${producerData.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
-      });
+      })
 
-      if (!res.ok) throw new Error('Error al actualizar productor');
+      if (!res.ok) throw new Error('Error al actualizar productor')
 
-      alert('Productor actualizado correctamente');
-      onUpdated();
+      alert('Productor actualizado correctamente')
+      onUpdated()
     } catch (err) {
-      alert('Error al actualizar productor');
+      alert('Error al actualizar productor')
     }
-  };
+  }
 
   return (
     <>
@@ -189,7 +189,7 @@ function EditProducer({ onUpdated }: EditProducerProps) {
         </form>
       )}
     </>
-  );
+  )
 }
 
-export default EditProducer;
+export default EditProducer

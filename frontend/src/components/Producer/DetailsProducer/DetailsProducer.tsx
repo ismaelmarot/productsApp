@@ -78,5 +78,4 @@ function DetailsProducer() {
   )
 }
 
-export default DetailsProducer;
-
+export default DetailsProducer
