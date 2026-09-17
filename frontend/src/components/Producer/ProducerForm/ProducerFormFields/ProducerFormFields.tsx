@@ -1,8 +1,8 @@
-import { countries } from '../../../../utils/countries';
+import { countries } from '../../../../utils/countries'
 import type { ProducerFormFieldsProps } from '../../../../interfaces/ProducerFormFields.interface'
-import TextInput from '../TextInput/TextInput';
-import SelectInput from '../SelectInput/SelectInput';
-import TextareaInput from '../TextAreaInput/TextAreaInput';
+import TextInput from '../TextInput/TextInput'
+import SelectInput from '../SelectInput/SelectInput'
+import TextareaInput from '../TextAreaInput/TextAreaInput'
 
 function ProducerFormFields({ formData, handleChange }: ProducerFormFieldsProps) {
   return (
@@ -116,7 +116,7 @@ function ProducerFormFields({ formData, handleChange }: ProducerFormFieldsProps)
         onChange={handleChange}
       />
     </>
-  );
+  )
 }
 
-export default ProducerFormFields;
+export default ProducerFormFields
