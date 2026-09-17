@@ -1,32 +1,32 @@
-import { useEffect, useState } from 'react';
-import type { Producer } from '../../../interfaces/producer.interface/Producer.interface';
-import type { ListProducersProps } from '../../../interfaces/producer.interface/ListProducers.interface';
+import { useEffect, useState } from 'react'
+import type { Producer } from '../../../interfaces/producer.interface/Producer.interface'
+import type { ListProducersProps } from '../../../interfaces/producer.interface/ListProducers.interface'
 
 function ListProducers({ onViewProducer, onEditProducer }: ListProducersProps) {
-  const [producers, setProducers] = useState<Producer[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [producers, setProducers] = useState<Producer[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchProducers = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/producers');
-        if (!res.ok) throw new Error("Error al cargar productores");
-        const data = await res.json();
-        setProducers(data);
+        const res = await fetch('http://localhost:3001/api/producers')
+        if (!res.ok) throw new Error("Error al cargar productores")
+        const data = await res.json()
+        setProducers(data)
       } catch (err: any) {
-        setError(err.message || "Error desconocido");
+        setError(err.message || "Error desconocido")
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchProducers();
-  }, []);
+    fetchProducers()
+  }, [])
 
-  if (loading) return <p>Cargando productores...</p>;
-  if (error) return <p className='text-danger'>{error}</p>;
-  if (producers.length === 0) return <p>No hay productores disponibles.</p>;
+  if (loading) return <p>Cargando productores...</p>
+  if (error) return <p className='text-danger'>{error}</p>
+  if (producers.length === 0) return <p>No hay productores disponibles.</p>
 
   return (
     <>
@@ -69,7 +69,7 @@ function ListProducers({ onViewProducer, onEditProducer }: ListProducersProps) {
         </tbody>
       </table>
     </>
-  );
+  )
 }
 
-export default ListProducers;
+export default ListProducers
