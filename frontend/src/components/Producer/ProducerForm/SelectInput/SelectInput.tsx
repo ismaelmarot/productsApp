@@ -1,4 +1,4 @@
-import type { SelectInputProps } from '../../../../interfaces/SelectedInput.interface';
+import type { SelectInputProps } from '../../../../interfaces/SelectedInput.interface'
 
 function SelectInput({
     label,
@@ -24,7 +24,7 @@ function SelectInput({
             ))}
         </select>
         </div>
-    );
+    )
 }
 
-export default SelectInput;
+export default SelectInput
