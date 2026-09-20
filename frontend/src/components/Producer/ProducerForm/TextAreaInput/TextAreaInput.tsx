@@ -1,4 +1,4 @@
-import type { TextareaInputProps } from '../../../../interfaces/TextAreaInput.interface';
+import type { TextareaInputProps } from '../../../../interfaces/TextAreaInput.interface'
 
 function TextareaInput({
     label,
@@ -18,7 +18,7 @@ function TextareaInput({
             rows={rows}
         />
         </div>
-    );
+    )
 }
 
-export default TextareaInput;
+export default TextareaInput
