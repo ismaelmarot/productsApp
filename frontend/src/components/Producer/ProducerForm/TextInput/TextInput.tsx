@@ -1,4 +1,4 @@
-import type { TextInputProps } from '../../../../interfaces/TextInput.interface'; 
+import type { TextInputProps } from '../../../../interfaces/TextInput.interface'
 
 function TextInput({
     label,
@@ -22,7 +22,7 @@ function TextInput({
             readOnly={readOnly}
         />
         </div>
-    );
+    )
 }
 
-export default TextInput; 
+export default TextInput
