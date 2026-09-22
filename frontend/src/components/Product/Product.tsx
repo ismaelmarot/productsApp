@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
-import type { Product } from '../../interfaces/Product.interface';
+import { useEffect, useState } from 'react'
+import type { Product } from '../../interfaces/Product.interface'
 import AddProduct from './AddProduct/AddProduct';
-import { formatPriceToEuropeanTipeHelper } from '../../helpers/formatPriceToEuroeanTipeHelper';
-import * as productsApi from '../../api/products.api.ts';
+import { formatPriceToEuropeanTipeHelper } from '../../helpers/formatPriceToEuroeanTipeHelper'
+import * as productsApi from '../../api/products.api.ts'
 
 function Products() {
-    const [products, setProducts] = useState<Product[]>([]);
+    const [products, setProducts] = useState<Product[]>([])
 
     useEffect(() => {
         productsApi.getProducts()
             .then(setProducts)
-            .catch((error) => console.error("Error fetching products:", error));
-    }, []);
+            .catch((error) => console.error("Error fetching products:", error))
+    }, [])
 
     const handleProductAdded = (newProduct: Product) => {
-        setProducts((prev) => [...prev, newProduct]);
-    };
+        setProducts((prev) => [...prev, newProduct])
+    }
 
     return (
         <div className='container mt-4'>
@@ -29,7 +29,7 @@ function Products() {
                 ))}
             </ul>
         </div>
-    );
+    )
 }
 
-export default Products;
+export default Products
