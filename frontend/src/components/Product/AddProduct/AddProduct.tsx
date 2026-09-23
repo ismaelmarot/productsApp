@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import type { AddProductProps } from '../../../interfaces/AddProduct.interface';
+import { useState, useEffect, useRef } from 'react'
+import type { AddProductProps } from '../../../interfaces/AddProduct.interface'
 import { Modal } from 'bootstrap'; 
-import SuccessModal from '../../SuccessModal/SuccessModal';
-import { formatPriceHelper } from '../../../helpers/formatPriceHelper';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
-import { getTodayDate } from '../../../helpers/getTodayDate';
-import { codeValidatorHelper } from '../../../helpers/codeValidatorHelper';
+import SuccessModal from '../../SuccessModal/SuccessModal'
+import { formatPriceHelper } from '../../../helpers/formatPriceHelper'
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper'
+import { getTodayDate } from '../../../helpers/getTodayDate'
+import { codeValidatorHelper } from '../../../helpers/codeValidatorHelper'
 
 const renderSetData = (
     label: string,
@@ -26,42 +26,41 @@ const renderSetData = (
             placeholder={ placeholder }
         />
     </div>
-);
+)
 
 function AddProduct({ onProductAdded }: AddProductProps) {
-    const [name, setName] = useState('');
-    const [price, setPrice] = useState('');
-    const [code, setCode] = useState('');
-    const [category, setCategory] = useState('');
-    const [cost_price, setCostPrice] = useState('');
-    const [sales_price, setSalesPrice] = useState('');
-    const [sold_price, setSoldPrice] = useState('');
-    // const [incoming_date, setIncomingDate] = useState('');
-    const [outgoing_date, setOutgoingDate] = useState('');
-    const [reason_outgoing, setReasonOutgoing] = useState('');
-    const [payment_date, setPaymentDate] = useState('');
-    const [payment_method, setPaymentMethod] = useState('');
-    const [note, setNote] = useState('');
-    const [incoming_date, setIncomingDate] = useState(getTodayDate());
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState('')
+    const [code, setCode] = useState('')
+    const [category, setCategory] = useState('')
+    const [cost_price, setCostPrice] = useState('')
+    const [sales_price, setSalesPrice] = useState('')
+    const [sold_price, setSoldPrice] = useState('')
+    const [outgoing_date, setOutgoingDate] = useState('')
+    const [reason_outgoing, setReasonOutgoing] = useState('')
+    const [payment_date, setPaymentDate] = useState('')
+    const [payment_method, setPaymentMethod] = useState('')
+    const [note, setNote] = useState('')
+    const [incoming_date, setIncomingDate] = useState(getTodayDate())
 
 
-    const [showModal, setShowModal] = useState(false);
-    const modalRef = useRef<HTMLDivElement | null>(null);
+    const [showModal, setShowModal] = useState(false)
+    const modalRef = useRef<HTMLDivElement | null>(null)
 
     useEffect(() => {
         if (modalRef.current) {
-            const modal = Modal.getOrCreateInstance(modalRef.current);
-            showModal ? modal.show() : modal.hide();
+            const modal = Modal.getOrCreateInstance(modalRef.current)
+            showModal ? modal.show() : modal.hide()
         }
-        }, [showModal]);
+        }, [showModal])
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault()
   
         const toNumber = (v: string) =>
-            v.trim() === '' ? null : parseFloat(v.replace(/\./g, '').replace(',', '.'));
+            v.trim() === '' ? null : parseFloat(v.replace(/\./g, '').replace(',', '.'))
 
-        const toText = (v: string) => (v.trim() === '' ? null : v.trim());
+        const toText = (v: string) => (v.trim() === '' ? null : v.trim())
 
         const newProduct = {
             code: toText(code),
@@ -77,11 +76,11 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             payment_date: toText(payment_date),
             payment_method: toText(payment_method),
             note: toText(note),
-        };
+        }
 
         if (!codeValidatorHelper(code)) {
-            alert("El código debe tener el formato AAA000 hasta ZZZ999 (3 letras + 3 números)");
-            return;
+            alert("El código debe tener el formato AAA000 hasta ZZZ999 (3 letras + 3 números)")
+            return
         }
 
         if (
@@ -89,8 +88,8 @@ function AddProduct({ onProductAdded }: AddProductProps) {
             newProduct.price === null ||
             isNaN(newProduct.price)
         ) {
-            alert("Nombre y precio son obligatorios");
-            return;
+            alert("Nombre y precio son obligatorios")
+            return
         }
 
         try {
@@ -100,34 +99,34 @@ function AddProduct({ onProductAdded }: AddProductProps) {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(newProduct),
-            });
+            })
         
-            const data = await res.json();
+            const data = await res.json()
         
             if (res.ok) {
-                onProductAdded(data);
-                setName('');
-                setPrice('');
-                setCode('');
-                setCategory('');
-                setCostPrice('');
-                setSalesPrice('');
-                setSoldPrice('');
-                setIncomingDate('');
-                setOutgoingDate('');
-                setReasonOutgoing('');
-                setPaymentDate('');
-                setPaymentMethod('');
-                setNote('');
-                setShowModal(true);
+                onProductAdded(data)
+                setName('')
+                setPrice('')
+                setCode('')
+                setCategory('')
+                setCostPrice('')
+                setSalesPrice('')
+                setSoldPrice('')
+                setIncomingDate('')
+                setOutgoingDate('')
+                setReasonOutgoing('')
+                setPaymentDate('')
+                setPaymentMethod('')
+                setNote('')
+                setShowModal(true)
             } else {
-                alert("Error al agregar el producto: " + (data.error || ''));
+                alert("Error al agregar el producto: " + (data.error || ''))
             }
         } catch (err) {
-            console.error(err);
-            alert ("Erorr de conexión al servidor");
+            console.error(err)
+            alert ("Erorr de conexión al servidor")
         }
-    };
+    }
 
     return (
         <>
@@ -156,4 +155,4 @@ function AddProduct({ onProductAdded }: AddProductProps) {
     )
 }
 
-export default AddProduct;
+export default AddProduct
