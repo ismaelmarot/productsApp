@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import type { DeleteProductProps } from '../../../interfaces/product.interface/DeleteProduct.interface';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
+import { useState } from 'react'
+import type { DeleteProductProps } from '../../../interfaces/product.interface/DeleteProduct.interface'
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper'
 
 const renderSetData = (
     label: string,
@@ -18,47 +18,47 @@ const renderSetData = (
                 required
             />
         </div>
-    );
+    )
 
 function DeleteProduct({ onProductDeleted }: DeleteProductProps) {
-    const [code, setCode] = useState('');
+    const [code, setCode] = useState('')
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+        e.preventDefault()
 
         if (!code.trim()) {
-            alert("Código inválido");
-            return;
+            alert("Código inválido")
+            return
         }
 
-        if (!window.confirm(`¿Eliminar producto con Código "${code}"?`)) return;
+        if (!window.confirm(`¿Eliminar producto con Código "${code}"?`)) return
 
         try {
-            const resGet = await fetch(`http://localhost:3001/api/products/code/${code}`);
+            const resGet = await fetch(`http://localhost:3001/api/products/code/${code}`)
             if (!resGet.ok) {
-            const errData = await resGet.json();
-                alert("Error al buscar el producto: " + errData.error);
-            return;
+            const errData = await resGet.json()
+                alert("Error al buscar el producto: " + errData.error)
+            return
         }
 
-        const product = await resGet.json();
+        const product = await resGet.json()
 
         const resDelete = await fetch(`http://localhost:3001/api/products/${product.id}`, {
             method: 'DELETE'
         });
 
         if (resDelete.ok) {
-            onProductDeleted(code);
-            setCode('');
+            onProductDeleted(code)
+            setCode('')
         } else {
-            const data = await resDelete.json();
-            alert("Error eliminando: " + data.error);
+            const data = await resDelete.json()
+            alert("Error eliminando: " + data.error)
         }
         } catch (err) {
-            console.error("Error eliminando producto:", err);
-            alert("Error de conexión al eliminar el producto");
+            console.error("Error eliminando producto:", err)
+            alert("Error de conexión al eliminar el producto")
         }
-    };
+    }
 
     return (
         <>
@@ -70,7 +70,7 @@ function DeleteProduct({ onProductDeleted }: DeleteProductProps) {
             </button>
             </form>
         </>
-    );
+    )
 }
 
-export default DeleteProduct;
+export default DeleteProduct
