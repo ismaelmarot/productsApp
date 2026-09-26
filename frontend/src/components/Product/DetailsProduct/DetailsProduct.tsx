@@ -1,46 +1,46 @@
-import { useState } from 'react';
-import type { Product } from '../../../interfaces/product.interface/Product.interface';
-import FormatPrice from '../../FormattedPriceInput/FormatPrice';
-import FormatDate from '../../FormatDate/FormatDate';
-import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper';
+import { useState } from 'react'
+import type { Product } from '../../../interfaces/product.interface/Product.interface'
+import FormatPrice from '../../FormattedPriceInput/FormatPrice'
+import FormatDate from '../../FormatDate/FormatDate'
+import { toUppercaseHelper } from '../../../helpers/toUppercaseHelper'
 
 function DetailsProduct() {
-    const [productCode, setProductCode] = useState('');
-    const [product, setProduct] = useState<Product | null>(null);
-    const [error, setError] = useState('');
+    const [productCode, setProductCode] = useState('')
+    const [product, setProduct] = useState<Product | null>(null)
+    const [error, setError] = useState('')
 
     const handleClose = () => {
-        setProduct(null);
-        setProductCode('');
-        setError('');
+        setProduct(null)
+        setProductCode('')
+        setError('')
     };
 
     const handleSearch = async () => {
-        setError('');
-        setProduct(null);
+        setError('')
+        setProduct(null)
 
         if (!productCode.trim()) {
-            setError('Por favor ingrese un Código válido');
-            return;
+            setError('Por favor ingrese un Código válido')
+            return
         }
 
         try {
-            const res = await fetch(`http://localhost:3001/api/products/code/${productCode}`);
+            const res = await fetch(`http://localhost:3001/api/products/code/${productCode}`)
             if (!res.ok) {
                 if (res.status === 404) {
-                    setError("Producto no encontrado");
+                    setError("Producto no encontrado")
                 } else {
-                    setError("Error al buscar el producto");
+                    setError("Error al buscar el producto")
                 }
-                return;
+                return
             }
 
-            const data = await res.json();
-            setProduct(data);
+            const data = await res.json()
+            setProduct(data)
         } catch (err) {
-            setError("Error de conexión con el servidor");
+            setError("Error de conexión con el servidor")
         }
-    };
+    }
 
     return (
         <>
@@ -89,4 +89,4 @@ function DetailsProduct() {
     )
 }
 
-export default DetailsProduct;
+export default DetailsProduct
